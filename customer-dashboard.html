@@ -1,0 +1,495 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25a4ad;
+            --primary-dark: #1c8c94;
+            --bg: #f8f9fa;
+            --sidebar-bg: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #333;
+            --text-muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sidebar */
+        .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid #eee; display: flex; flex-direction: column; transition: 0.3s; }
+        .sidebar-logo { padding: 25px; text-align: center; border-bottom: 1px solid #eee; }
+        .sidebar-logo h2 { font-size: 24px; font-weight: 700; letter-spacing: 1px; color: var(--text-main); }
+        .sidebar-logo span { color: var(--primary); }
+        .sidebar-menu { flex: 1; padding: 20px 0; overflow-y: auto; }
+        .menu-item { display: flex; align-items: center; padding: 15px 25px; color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 14px; font-weight: 500; }
+        .menu-item:hover, .menu-item.active { background: rgba(37,164,173,0.05); color: var(--primary); border-left: 4px solid var(--primary); }
+        .menu-item i { width: 25px; font-size: 18px; }
+        .sidebar-footer { padding: 20px; border-top: 1px solid #eee; }
+
+        /* Main Content */
+        .main-content { padding-top: 80px;  flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* Header */
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 260px; /* sidebar width */
+            right: 0;
+            z-index: 1000;
+            background: var(--card-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+        .search-bar { display: flex; align-items: center; background: var(--bg); padding: 10px 20px; border-radius: 30px; width: 300px; }
+        .search-bar input { border: none; background: transparent; outline: none; margin-left: 10px; width: 100%; color: var(--text-main); font-size: 13px; }
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        .header-actions i { font-size: 18px; color: var(--text-muted); cursor: pointer; }
+        .user-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .user-profile img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .user-info h4 { font-size: 14px; color: var(--text-main); }
+        .user-info p { font-size: 11px; color: var(--text-muted); }
+
+        /* Dashboard Body */
+        .dashboard-body { flex: 1; padding: 30px; overflow-y: auto; }
+        
+        .welcome-banner { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 15px; padding: 40px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; position: relative; overflow: hidden; }
+        .welcome-banner::after { content: ''; position: absolute; right: 0; top: 0; width: 300px; height: 100%; background: url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover; opacity: 0.3; border-radius: 50% 0 0 50%; }
+        .welcome-content { position: relative; z-index: 2; }
+        .welcome-content h2 { font-size: 28px; margin-bottom: 10px; }
+        .welcome-content p { font-size: 14px; opacity: 0.9; max-width: 500px; line-height: 1.6; }
+        .btn-banner { display: inline-block; margin-top: 15px; padding: 10px 25px; background: white; color: var(--primary); font-weight: 600; font-size: 13px; border-radius: 20px; text-decoration: none; transition: 0.3s; }
+        .btn-banner:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .dashboard-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+
+        .section-title { font-size: 18px; color: var(--text-main); margin-bottom: 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .view-all { font-size: 12px; color: var(--primary); text-decoration: none; font-weight: 500; }
+
+        /* Upcoming Trip */
+        .trip-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.03); margin-bottom: 30px; display: flex; }
+        .trip-img { width: 30%; position: relative; }
+        .trip-img img { width: 100%; height: 100%; object-fit: cover; }
+        .trip-badge { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.6); color: white; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; backdrop-filter: blur(5px); }
+        .trip-details { padding: 25px; flex: 1; }
+        .trip-details h3 { font-size: 20px; margin-bottom: 15px; color: var(--text-main); }
+        .trip-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .info-item { display: flex; gap: 10px; align-items: flex-start; }
+        .info-item i { color: var(--primary); margin-top: 3px; }
+        .info-item div p { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+        .info-item div h5 { font-size: 13px; color: var(--text-main); font-weight: 500; }
+        .btn-outline { padding: 8px 20px; border: 1px solid var(--primary); color: var(--primary); border-radius: 20px; font-size: 12px; font-weight: 500; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-outline:hover { background: var(--primary); color: white; }
+
+        /* Recommended */
+        .rec-card { background: var(--card-bg); border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.03); padding: 20px; margin-bottom: 25px; }
+        .rec-item { display: flex; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .rec-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .rec-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; }
+        .rec-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .rec-info h4 { font-size: 14px; color: var(--text-main); margin-bottom: 4px; }
+        .rec-info p { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+        .rec-price { font-size: 14px; font-weight: 600; color: var(--primary); margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <img src="assets/logo_0226.webp" alt="Travol Logo" style="height: 35px; width: auto; object-fit: contain;">
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#" class="menu-item active"><i class="fa-solid fa-border-all"></i> My Dashboard</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-plane"></i> My Trips</a>
+            <a href="#" class="menu-item"><i class="fa-regular fa-heart"></i> Saved</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-message"></i> Messages</a>
+            <a href="#" class="menu-item"><i class="fa-regular fa-credit-card"></i> Payments</a>
+            <a href="#" class="menu-item"><i class="fa-regular fa-user"></i> Profile</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="login.html" class="menu-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+                <input type="text" placeholder="Search destinations, tours...">
+            </div>
+            <div class="header-actions">
+                <i class="fa-regular fa-bell"></i>
+                <div class="user-profile">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Customer">
+                    <div class="user-info">
+                        <h4 id="profileName">Sarah Jenkins</h4>
+                        <p id="profileEmail" style="font-size: 11px; margin-top: 2px;">sarah.jenkins@example.com</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h2>Welcome back, Sarah!</h2>
+                    <p>You have an upcoming trip to the Maldives in 14 days. Make sure you have packed everything you need and checked your flight details.</p>
+                    <a href="#" class="btn-banner">View Trip Details</a>
+                </div>
+            </div>
+
+            <div class="dashboard-layout">
+                <!-- Left Column -->
+                <div>
+                    <div class="section-title">
+                        <span>Upcoming Trip</span>
+                        <a href="#" class="view-all">View All Trips</a>
+                    </div>
+                    
+                    <div class="trip-card">
+                        <div class="trip-img">
+                            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Maldives">
+                            <div class="trip-badge">In 14 Days</div>
+                        </div>
+                        <div class="trip-details">
+                            <h3>Maldives Luxury Escape</h3>
+                            <div class="trip-info-grid">
+                                <div class="info-item">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <div>
+                                        <p>Date</p>
+                                        <h5>Oct 15 - Oct 22, 2024</h5>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-plane-departure"></i>
+                                    <div>
+                                        <p>Flight</p>
+                                        <h5>Emirates EK204</h5>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-bed"></i>
+                                    <div>
+                                        <p>Hotel</p>
+                                        <h5>Soneva Jani Resort</h5>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fa-solid fa-user-group"></i>
+                                    <div>
+                                        <p>Travelers</p>
+                                        <h5>2 Adults</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-outline">Download Itinerary</a>
+                        </div>
+                    </div>
+
+                    <div class="section-title">
+                        <span>Past Trips</span>
+                    </div>
+                    <div class="trip-card" style="opacity: 0.8;">
+                        <div class="trip-img" style="width: 20%;">
+                            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Paris">
+                            <div class="trip-badge" style="background: var(--text-muted);">Completed</div>
+                        </div>
+                        <div class="trip-details" style="padding: 15px 25px;">
+                            <h3 style="font-size: 16px; margin-bottom: 5px;">Romantic Paris Getaway</h3>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">May 10 - May 15, 2023</p>
+                            <div style="color: #f1c40f; font-size: 12px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <div class="section-title">
+                        <span>Recommended For You</span>
+                    </div>
+                    <div class="rec-card">
+                        <div class="rec-item">
+                            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Venice">
+                            <div class="rec-info">
+                                <h4>Venice Romance</h4>
+                                <p><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Italy</p>
+                                <div class="rec-price">$1,650</div>
+                            </div>
+                        </div>
+                        <div class="rec-item">
+                            <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Alps">
+                            <div class="rec-info">
+                                <h4>Swiss Alps Ski</h4>
+                                <p><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Switzerland</p>
+                                <div class="rec-price">$2,100</div>
+                            </div>
+                        </div>
+                        <div class="rec-item">
+                            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Kyoto">
+                            <div class="rec-info">
+                                <h4>Kyoto Culture</h4>
+                                <p><i class="fa-solid fa-location-dot" style="color: var(--primary);"></i> Japan</p>
+                                <div class="rec-price">$1,899</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuItems = document.querySelectorAll('.sidebar-menu .menu-item');
+        const dashboardBody = document.querySelector('.dashboard-body');
+        const originalContent = dashboardBody.innerHTML;
+
+        const storedName = localStorage.getItem('userName');
+        const storedEmail = localStorage.getItem('userEmail');
+        
+        if (storedName) {
+            document.getElementById('profileName').textContent = storedName;
+            
+            // Also update the personal information section if it's the dashboard
+            const personalInfoSection = document.querySelector('.dashboard-body p');
+            if (personalInfoSection && personalInfoSection.innerHTML.includes('<strong>Name:</strong>')) {
+                personalInfoSection.innerHTML = `<strong>Name:</strong> ${storedName}<br><strong>Email:</strong> ${storedEmail || 'sarah.jenkins@example.com'}<br><strong>Phone:</strong> +1 (555) 123-4567`;
+            }
+        }
+        if (storedEmail) {
+            document.getElementById('profileEmail').textContent = storedEmail;
+        }
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                const sectionName = item.textContent.trim();
+                if (sectionName === 'My Dashboard') {
+                    dashboardBody.innerHTML = originalContent;
+                } else if (sectionName === 'My Trips') {
+                    dashboardBody.innerHTML = `
+                        <div class="trips-page-content" style="animation: fadeIn 0.3s ease;">
+                            <h2 style="font-size: 28px; margin-bottom: 5px;">My Trips</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 30px;">Manage your past, present, and future travel itineraries.</p>
+                            
+                            <!-- Section 1 -->
+                            <div class="section-title"><span>1. Upcoming Trips</span></div>
+                            <div class="trip-card">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/maldives.webp" alt="Maldives" style="height: 100%; width: 100%; object-fit: cover;">
+                                    <div class="trip-badge">In 14 Days</div>
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>Maldives Luxury Escape</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">A perfect relaxing getaway for 2 adults.</p>
+                                    <a href="#" class="btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <!-- Section 2 -->
+                            <div class="section-title" style="margin-top: 30px;"><span>2. Past Trips</span></div>
+                            <div class="trip-card" style="opacity: 0.8;">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/cinque-terre.webp" alt="Italy" style="height: 100%; width: 100%; object-fit: cover;">
+                                    <div class="trip-badge" style="background: var(--text-muted);">Completed</div>
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>Cinque Terre Coastal Tour</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px;">Oct 05 - Oct 12, 2022</p>
+                                </div>
+                            </div>
+
+                            <!-- Section 3 -->
+                            <div class="section-title" style="margin-top: 30px;"><span>3. Cancelled Trips</span></div>
+                            <div class="trip-card" style="opacity: 0.6; filter: grayscale(1);">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/mount-fuji.webp" alt="Japan" style="height: 100%; width: 100%; object-fit: cover;">
+                                    <div class="trip-badge" style="background: #e74c3c;">Cancelled</div>
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>Mount Fuji Hike</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px;">Refund Processed</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (sectionName === 'Saved') {
+                    dashboardBody.innerHTML = `
+                        <div class="trips-page-content" style="animation: fadeIn 0.3s ease;">
+                            <h2 style="font-size: 28px; margin-bottom: 5px;">Saved</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 30px;">Your favorite destinations and packages.</p>
+                            
+                            <div class="section-title"><span>1. Saved Destinations</span></div>
+                            <div class="trip-card">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/cinque-terre.webp" alt="Bali" style="height: 100%; width: 100%; object-fit: cover;">
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>Cinque Terre Coastal Tour</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">You saved this beautiful coastal region on Oct 1.</p>
+                                    <a href="#" class="btn-outline">View Destination</a>
+                                </div>
+                            </div>
+                            
+                            <div class="section-title" style="margin-top: 30px;"><span>2. Saved Packages</span></div>
+                            <div class="trip-card">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/lake-louise.webp" alt="Europe" style="height: 100%; width: 100%; object-fit: cover;">
+                                    <div class="trip-badge" style="background: #e74c3c;">Price Drop</div>
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>Canadian Rockies (14 Days)</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Price dropped by $200! Book now.</p>
+                                    <a href="#" class="btn-outline">View Package</a>
+                                </div>
+                            </div>
+
+                            <div class="section-title" style="margin-top: 30px;"><span>3. Saved Guides</span></div>
+                            <div class="trip-card">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/packing.webp" alt="Packing" style="height: 100%; width: 100%; object-fit: cover;">
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>How to Pack Light</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Saved from our travel blog.</p>
+                                    <a href="#" class="btn-outline">Read Article</a>
+                                </div>
+                            </div>
+
+                            <div class="section-title" style="margin-top: 30px;"><span>4. Recently Viewed</span></div>
+                            <div class="trip-card">
+                                <div class="trip-img" style="width: 200px;">
+                                    <img src="assets/maldives.webp" alt="Maldives" style="height: 100%; width: 100%; object-fit: cover;">
+                                </div>
+                                <div class="trip-details" style="padding: 20px;">
+                                    <h3>Maldives Resort</h3>
+                                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Viewed 2 hours ago.</p>
+                                    <a href="#" class="btn-outline">Continue Browsing</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (sectionName === 'Messages') {
+                    dashboardBody.innerHTML = `
+                        <div class="trips-page-content" style="animation: fadeIn 0.3s ease;">
+                            <h2 style="font-size: 28px; margin-bottom: 5px;">Messages</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 30px;">Communicate with your travel agents and support team.</p>
+                            
+                            <div class="section-title"><span>1. Unread Messages</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><span class='trip-badge' style='background: var(--primary); padding: 3px 8px; font-size: 10px; border-radius: 5px; margin-right: 10px; color: white;'>New</span> <strong>Agent Sarah:</strong> Your flight itinerary has been updated.</p>
+                            </div>
+                            <div class="section-title"><span>2. Active Conversations</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Support Team:</strong> We are currently looking into your hotel upgrade request...</p>
+                            </div>
+                            <div class="section-title"><span>3. System Notifications</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>System:</strong> Your payment for the 'Maldives Luxury Escape' was successful.</p>
+                            </div>
+                            <div class="section-title"><span>4. Archived Messages</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Agent John:</strong> Welcome back from Paris! We hope you had a great time.</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (sectionName === 'Payments') {
+                    dashboardBody.innerHTML = `
+                        <div class="trips-page-content" style="animation: fadeIn 0.3s ease;">
+                            <h2 style="font-size: 28px; margin-bottom: 5px;">Payments</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 30px;">Manage your billing, invoices, and payment methods.</p>
+                            
+                            <div class="section-title"><span>1. Upcoming Payments</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>$450.00</strong> due on Nov 1st for Maldives Trip balance.</p>
+                            </div>
+                            <div class="section-title"><span>2. Payment History</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>$1,200.00</strong> paid successfully on Sep 15 for Emirates Flights.</p>
+                            </div>
+                            <div class="section-title"><span>3. Saved Payment Methods</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><i class='fa-regular fa-credit-card' style='color: var(--primary); font-size: 18px;'></i> Visa ending in <strong>4242</strong></p>
+                            </div>
+                            <div class="section-title"><span>4. Billing Information</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Sarah Jenkins</strong><br>123 Travel Ave<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (sectionName === 'Profile') {
+                    dashboardBody.innerHTML = `
+                        <div class="trips-page-content" style="animation: fadeIn 0.3s ease;">
+                            <h2 style="font-size: 28px; margin-bottom: 5px;">Profile</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 30px;">Your personal travel identity and preferences.</p>
+                            
+                            <div class="section-title"><span>1. Personal Information</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Name:</strong> Sarah Jenkins<br><strong>Email:</strong> sarah.jenkins@example.com<br><strong>Phone:</strong> +1 (555) 123-4567</p>
+                            </div>
+                            <div class="section-title"><span>2. Travel Preferences</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Seating:</strong> Window Seat<br><strong>Dietary Requirements:</strong> Vegetarian</p>
+                            </div>
+                            <div class="section-title"><span>3. Loyalty & Rewards</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Points Balance:</strong> 12,450 Stackly Points <i class='fa-solid fa-medal' style='color: #f1c40f;'></i> Gold Tier</p>
+                            </div>
+                            <div class="section-title"><span>4. Connected Accounts</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Google:</strong> Connected<br><strong>Facebook:</strong> Not Connected</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (sectionName === 'Settings') {
+                    dashboardBody.innerHTML = `
+                        <div class="trips-page-content" style="animation: fadeIn 0.3s ease;">
+                            <h2 style="font-size: 28px; margin-bottom: 5px;">Settings</h2>
+                            <p style="color: var(--text-muted); margin-bottom: 30px;">Configure your account preferences and security.</p>
+                            
+                            <div class="section-title"><span>1. Account Security</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Password:</strong> Last changed 3 months ago.<br><strong>Two-Factor Authentication:</strong> <span style='color: #27ae60;'>Enabled</span></p>
+                            </div>
+                            <div class="section-title"><span>2. Notification Preferences</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Email Alerts:</strong> On<br><strong>SMS Alerts:</strong> Off<br><strong>Marketing Emails:</strong> Unsubscribed</p>
+                            </div>
+                            <div class="section-title"><span>3. Language & Region</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Language:</strong> English (US)<br><strong>Currency:</strong> USD ($)<br><strong>Timezone:</strong> EST</p>
+                            </div>
+                            <div class="section-title"><span>4. Privacy Settings</span></div>
+                            <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+                                <p><strong>Profile Visibility:</strong> Private<br><strong>Data Sharing:</strong> Essential Only</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+

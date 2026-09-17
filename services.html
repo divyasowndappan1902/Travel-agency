@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25a4ad;
+            --primary-dark: #1c8c94;
+            --text-main: #1a1a1a;
+            --text-muted: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --shadow-sm: 0 4px 15px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-white); color: var(--text-main); overflow-x: hidden; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+
+        /* Navbar */
+        
+        header {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000 !important;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 8% !important;
+            transition: all 0.3s ease;
+ display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+        .logo h1 { font-size: 32px; font-weight: 700; letter-spacing: 1px; line-height: 1; font-family: 'Poppins', sans-serif; }
+        .logo p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-family: 'Poppins', sans-serif;}
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul li a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; transition: var(--transition); font-family: 'Poppins', sans-serif;}
+        nav ul li a:hover { color: var(--primary); }
+
+        section { padding: 100px 8%; position: relative; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 42px; color: var(--text-main); margin-bottom: 15px; font-weight: 700; }
+        .section-header p { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto; font-family: 'Poppins', sans-serif; line-height: 1.6; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* 1. SERVICES HERO */
+        #srv-hero {
+            height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            color: white; padding-top: 80px;
+        }
+        .hero-content h1 { font-size: 56px; font-weight: 700; margin-bottom: 20px; }
+        .hero-content p { font-size: 18px; max-width: 700px; margin: 0 auto; font-family: 'Poppins', sans-serif; font-weight: 300; opacity: 0.9; line-height: 1.6; }
+
+        /* 2. OUR TRAVEL SERVICES */
+        #main-services { background: var(--bg-light); }
+        .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .srv-card {
+            background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow-sm);
+            transition: var(--transition); border: 1px solid #eaeaea; display: flex; flex-direction: column;
+        }
+        .srv-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .srv-img { height: 300px; overflow: hidden; position: relative; }
+        .srv-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .srv-card:hover .srv-img img { transform: scale(1.1); }
+        .srv-icon {
+            position: absolute; bottom: -25px; right: 30px; width: 50px; height: 50px;
+            background: var(--primary); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+            box-shadow: 0 5px 15px rgba(37, 164, 173, 0.4); border: 3px solid white; z-index: 2;
+        }
+        .srv-content { padding: 40px 30px 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        .srv-content h3 { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 15px; color: var(--text-main); }
+        .srv-content p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
+        .btn-link { font-size: 14px; font-weight: 600; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: var(--transition); }
+        .btn-link:hover { gap: 12px; color: var(--primary-dark); }
+
+        /* 3. CUSTOM TRIP PLANNING */
+        #custom-trip .trip-container { display: flex; align-items: center; gap: 60px; }
+        .trip-content { flex: 1; }
+        .trip-content h2 { font-size: 38px; margin-bottom: 20px; line-height: 1.2; }
+        .trip-content p { color: var(--text-muted); line-height: 1.7; margin-bottom: 30px; font-size: 15px; }
+        .trip-features { list-style: none; margin-bottom: 40px; }
+        .trip-features li { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-weight: 500; font-size: 15px; }
+        .trip-features i { color: var(--primary); font-size: 20px; }
+        .btn-primary { display: inline-block; padding: 15px 35px; background: var(--primary); color: white; border-radius: 30px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 164, 173, 0.3); }
+        .trip-img { flex: 1; position: relative; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .trip-img img { width: 100%; height: auto; display: block; }
+        .trip-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(45deg, rgba(37,164,173,0.2), transparent); }
+
+        /* 4. DESTINATION SERVICES */
+        #dest-services { background: var(--bg-light); }
+        .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .dest-card { position: relative; height: 350px; border-radius: 15px; overflow: hidden; cursor: pointer; }
+        .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+        .dest-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; transition: var(--transition); }
+        .dest-card:hover img { transform: scale(1.1); }
+        .dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(37,164,173,0.9), rgba(0,0,0,0.2)); }
+        .dest-overlay h4 { font-family: 'Poppins', sans-serif; color: white; font-size: 24px; font-weight: 600; transform: translateY(20px); transition: var(--transition); opacity: 0.9; }
+        .dest-overlay p { color: white; font-size: 14px; opacity: 0; transform: translateY(20px); transition: var(--transition); margin-top: 10px; }
+        .dest-card:hover .dest-overlay h4 { transform: translateY(0); opacity: 1; }
+        .dest-card:hover .dest-overlay p { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+
+        /* 5. HOW OUR SERVICE WORKS */
+        #how-it-works { padding: 120px 8%; text-align: center; }
+        .steps-container { display: flex; justify-content: space-between; position: relative; margin-top: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+        .steps-container::before { content: ''; position: absolute; top: 40px; left: 10%; right: 10%; height: 2px; background: #eee; z-index: 1; }
+        .step-item { position: relative; z-index: 2; width: 22%; display: flex; flex-direction: column; align-items: center; }
+        .step-icon { width: 80px; height: 80px; background: white; border: 2px solid #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: var(--primary); margin-bottom: 20px; transition: var(--transition); box-shadow: var(--shadow-sm); }
+        .step-item:hover .step-icon { background: var(--primary); color: white; border-color: var(--primary); transform: scale(1.1); }
+        .step-num { font-size: 14px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; letter-spacing: 1px; }
+        .step-item h4 { font-family: 'Poppins', sans-serif; font-size: 18px; margin-bottom: 10px; }
+        .step-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+        /* 6. WHY CHOOSE OUR SERVICES */
+        #why-choose { background: var(--bg-light); }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .why-card { background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-sm); transition: var(--transition); text-align: center; }
+        .why-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
+        .why-icon { width: 70px; height: 70px; margin: 0 auto 25px; background: rgba(37,164,173,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: var(--primary); transition: var(--transition); }
+        .why-card:hover .why-icon { background: var(--primary); color: white; }
+        .why-card h4 { font-family: 'Poppins', sans-serif; font-size: 20px; margin-bottom: 15px; }
+        .why-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        /* 7. PREMIUM TRAVEL EXPERIENCE */
+        #premium-exp {
+            padding: 150px 8%; text-align: center; color: white;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+        .premium-content { max-width: 800px; margin: 0 auto; }
+        .premium-content h2 { font-size: 48px; margin-bottom: 25px; line-height: 1.2; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .premium-content p { font-family: 'Poppins', sans-serif; font-size: 18px; line-height: 1.7; opacity: 0.9; margin-bottom: 0; font-weight: 300; }
+
+        /* 8. SERVICE PACKAGES */
+        #packages { background: var(--bg-white); }
+        .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: center; }
+        .pkg-card { background: var(--bg-light); border-radius: 20px; padding: 40px; text-align: center; transition: var(--transition); border: 1px solid #eee; position: relative; overflow: hidden; }
+        .pkg-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
+        .pkg-card.featured { background: var(--primary); color: white; transform: scale(1.05); border: none; box-shadow: var(--shadow-lg); }
+        .pkg-card.featured:hover { transform: scale(1.05) translateY(-10px); }
+        .pkg-badge { position: absolute; top: 20px; right: -35px; background: #ff4757; color: white; font-size: 12px; font-weight: 700; padding: 5px 40px; transform: rotate(45deg); letter-spacing: 1px; }
+        .pkg-title { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 10px; }
+        .pkg-desc { font-size: 14px; margin-bottom: 30px; opacity: 0.8; }
+        .pkg-price { font-size: 40px; font-weight: 700; margin-bottom: 30px; font-family: 'Poppins', sans-serif; }
+        .pkg-price span { font-size: 16px; font-weight: 400; opacity: 0.8; }
+        .pkg-features { list-style: none; margin-bottom: 40px; text-align: left; }
+        .pkg-features li { margin-bottom: 15px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .pkg-features i { color: var(--primary); font-size: 16px; }
+        .pkg-card.featured .pkg-features i { color: white; }
+        .btn-outline { display: inline-block; padding: 12px 30px; border: 2px solid var(--primary); color: var(--primary); border-radius: 30px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+        .pkg-card.featured .btn-outline { border-color: white; color: white; }
+        .pkg-card.featured .btn-outline:hover { background: white; color: var(--primary); }
+
+        /* 9. TRAVELER TESTIMONIALS */
+        #testimonials { background: var(--bg-light); text-align: center; }
+        .testi-slider { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; max-width: 1000px; margin: 0 auto; }
+        .testi-slider::-webkit-scrollbar { display: none; }
+        .testi-card { flex: 0 0 100%; scroll-snap-align: center; background: white; padding: 50px; border-radius: 20px; box-shadow: var(--shadow-sm); position: relative; }
+        .testi-card i.fa-quote-left { font-size: 40px; color: rgba(37,164,173,0.1); position: absolute; top: 30px; left: 40px; }
+        .testi-text { font-size: 18px; font-style: italic; color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-family: 'Playfair Display', serif; }
+        .testi-user { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .testi-user img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; }
+        .testi-user h4 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; }
+        .testi-user p { font-size: 13px; color: var(--primary); }
+        .stars { color: #f1c40f; font-size: 14px; margin-top: 5px; }
+
+        /* 10. FINAL CTA */
+        #final-cta { text-align: center; padding: 100px 8%; background: linear-gradient(rgba(37, 164, 173, 0.9), rgba(28, 140, 148, 0.95)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed; color: white; }
+        .cta-content { max-width: 700px; margin: 0 auto; }
+        .cta-content h2 { font-size: 46px; margin-bottom: 20px; }
+        .cta-content p { font-family: 'Poppins', sans-serif; font-size: 18px; margin-bottom: 40px; opacity: 0.9; }
+        .cta-btns { display: flex; gap: 20px; justify-content: center; }
+        .btn-white { padding: 15px 35px; background: white; color: var(--primary-dark); border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid white; }
+        .btn-white:hover { background: transparent; color: white; }
+        .btn-transparent { padding: 15px 35px; background: transparent; color: white; border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid white; }
+        .btn-transparent:hover { background: white; color: var(--primary-dark); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dest-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .pkg-grid { grid-template-columns: 1fr; gap: 40px; }
+            .pkg-card.featured { transform: scale(1); }
+            .pkg-card.featured:hover { transform: translateY(-10px); }
+        }
+        @media (max-width: 768px) {
+            section { padding: 60px 5%; }
+            .trip-container { flex-direction: column; }
+            .steps-container { flex-direction: column; gap: 40px; }
+            .steps-container::before { display: none; }
+            .step-item { width: 100%; }
+            .dest-grid, .why-grid, .srv-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 40px; }
+            .premium-content h2, .cta-content h2 { font-size: 36px; }
+            .cta-btns { flex-direction: column; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="assets/logo_0226.webp" alt="Travol Logo" style="height: 45px; width: auto; object-fit: contain;">
+        </a>
+        <nav style="flex: 1; display: flex; justify-content: center;">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="services.html" style="color: var(--primary);">Service</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    
+            <div class="auth-btn" style="margin-left: auto;">
+                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);">Login</a>
+            </div>
+        </header>
+
+    <!-- 1. SERVICES HERO -->
+    <section id="srv-hero">
+        <div class="hero-content reveal">
+            <h1>Travel Made Simple. <br><span class="serif">Experiences Made Extraordinary.</span></h1>
+            <p>From seamless flight bookings to fully customized luxury itineraries, we handle every detail so you can focus on creating unforgettable memories.</p>
+        </div>
+    </section>
+
+    <!-- 2. OUR TRAVEL SERVICES -->
+    <section id="main-services">
+        <div class="section-header reveal">
+            <h2>Our Travel Services</h2>
+            <p>Comprehensive solutions tailored to meet every traveler's unique needs and desires.</p>
+        </div>
+        <div class="srv-grid">
+            <div class="srv-card reveal delay-1">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Flight">
+                    <div class="srv-icon"><i class="fa-solid fa-plane"></i></div>
+                </div>
+                <div class="srv-content">
+                    <h3>Flight & Hotel Booking</h3>
+                    <p>Access exclusive rates for flights and premium accommodations worldwide, meticulously organized for a seamless journey.</p>
+                    <a href="#" class="btn-primary">Explore Service</a>
+                </div>
+            </div>
+            <div class="srv-card reveal delay-2">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tour">
+                    <div class="srv-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                </div>
+                <div class="srv-content">
+                    <h3>Customized Tour Planning</h3>
+                    <p>Bespoke itineraries designed from scratch based on your interests, pace, and travel style.</p>
+                    <a href="#" class="btn-primary">Explore Service</a>
+                </div>
+            </div>
+            <div class="srv-card reveal delay-3">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Honeymoon">
+                    <div class="srv-icon"><i class="fa-solid fa-heart"></i></div>
+                </div>
+                <div class="srv-content">
+                    <h3>Honeymoon Packages</h3>
+                    <p>Romantic getaways to breathtaking destinations, featuring private dinners, couple's spa treatments, and luxury stays.</p>
+                    <a href="#" class="btn-primary">Explore Service</a>
+                </div>
+            </div>
+            <div class="srv-card reveal delay-1">
+                <div class="srv-img">
+                    <img src="assets/family-travel.webp" alt="Family">
+                    <div class="srv-icon"><i class="fa-solid fa-users"></i></div>
+                </div>
+                <div class="srv-content">
+                    <h3>Family Holidays</h3>
+                    <p>Stress-free family vacations with kid-friendly activities, spacious accommodations, and engaging local experiences.</p>
+                    <a href="#" class="btn-primary">Explore Service</a>
+                </div>
+            </div>
+            <div class="srv-card reveal delay-2">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Adventure">
+                    <div class="srv-icon"><i class="fa-solid fa-mountain"></i></div>
+                </div>
+                <div class="srv-content">
+                    <h3>Adventure Tours</h3>
+                    <p>Thrilling expeditions led by expert guides, from trekking the Himalayas to scuba diving in the Great Barrier Reef.</p>
+                    <a href="#" class="btn-primary">Explore Service</a>
+                </div>
+            </div>
+            <div class="srv-card reveal delay-3">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Luxury">
+                    <div class="srv-icon"><i class="fa-solid fa-gem"></i></div>
+                </div>
+                <div class="srv-content">
+                    <h3>Luxury Travel Experiences</h3>
+                    <p>VIP access, private jet charters, luxury villa rentals, and exclusive culinary experiences for the discerning traveler.</p>
+                    <a href="#" class="btn-primary">Explore Service</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CUSTOM TRIP PLANNING -->
+    <section id="custom-trip">
+        <div class="trip-container">
+            <div class="trip-content reveal">
+                <h2>Design Your Dream Vacation</h2>
+                <p>Don't settle for off-the-shelf packages. Our travel designers work closely with you to craft an itinerary that perfectly aligns with your vision. From selecting the ideal destinations to securing reservations at the finest restaurants, we handle it all.</p>
+                <ul class="trip-features">
+                    <li><i class="fa-solid fa-check-circle"></i> One-on-one consultation with a travel expert</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Flexible itineraries tailored to your pace</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Curated list of unique local activities</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Digital itinerary app for easy access during travel</li>
+                </ul>
+                <a href="#" class="btn-primary">Plan My Trip</a>
+            </div>
+            <div class="trip-img reveal delay-2">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Trip Planning">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. DESTINATION SERVICES -->
+    <section id="dest-services">
+        <div class="section-header reveal">
+            <h2>Destination Services</h2>
+            <p>Whatever landscape calls to you, we have the expertise to get you there comfortably.</p>
+        </div>
+        <div class="dest-grid">
+            <div class="dest-card reveal delay-1">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="International">
+                <div class="dest-overlay">
+                    <h4>International Travel</h4>
+                    <p>Seamless cross-border journeys, visa assistance, and multi-country tours.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal delay-2">
+                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Domestic">
+                <div class="dest-overlay">
+                    <h4>Domestic Travel</h4>
+                    <p>Discover the hidden wonders and iconic landmarks within your own borders.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal delay-3">
+                <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beach">
+                <div class="dest-overlay">
+                    <h4>Beach Escapes</h4>
+                    <p>Sun, sand, and surf at the world's most pristine coastal destinations.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal delay-1">
+                <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mountain">
+                <div class="dest-overlay">
+                    <h4>Mountain Getaways</h4>
+                    <p>Cozy chalets, ski resorts, and breathtaking alpine views.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal delay-2">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="City">
+                <div class="dest-overlay">
+                    <h4>City Breaks</h4>
+                    <p>Fast-paced urban exploration, shopping, and vibrant nightlife.</p>
+                </div>
+            </div>
+            <div class="dest-card reveal delay-3">
+                <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Culture">
+                <div class="dest-overlay">
+                    <h4>Cultural Experiences</h4>
+                    <p>Deep dives into local traditions, history, and authentic cuisine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. HOW OUR SERVICE WORKS -->
+    <section id="how-it-works">
+        <div class="section-header reveal">
+            <h2>How Our Service Works</h2>
+            <p>Four simple steps to your perfect getaway.</p>
+        </div>
+        <div class="steps-container">
+            <div class="step-item reveal">
+                <div class="step-icon"><i class="fa-solid fa-comments"></i></div>
+                <div class="step-num">01</div>
+                <h4>Tell Us Your Plan</h4>
+                <p>Share your vision, budget, and travel dates with our experts.</p>
+            </div>
+            <div class="step-item reveal delay-1">
+                <div class="step-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                <div class="step-num">02</div>
+                <h4>We Design Your Journey</h4>
+                <p>We craft a personalized itinerary and refine it until it's perfect.</p>
+            </div>
+            <div class="step-item reveal delay-2">
+                <div class="step-icon"><i class="fa-solid fa-credit-card"></i></div>
+                <div class="step-num">03</div>
+                <h4>Confirm Your Booking</h4>
+                <p>Approve the plan and we handle all the reservations securely.</p>
+            </div>
+            <div class="step-item reveal delay-3">
+                <div class="step-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <div class="step-num">04</div>
+                <h4>Travel & Enjoy</h4>
+                <p>Pack your bags and enjoy a seamless, unforgettable trip.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. WHY CHOOSE OUR SERVICES -->
+    <section id="why-choose">
+        <div class="section-header reveal">
+            <h2>Why Choose Our Services</h2>
+            <p>We redefine travel by combining luxury, efficiency, and profound local knowledge.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <div class="why-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+                <h4>Personalized Experiences</h4>
+                <p>Every detail is curated to match your specific tastes, ensuring a trip that is distinctly yours.</p>
+            </div>
+            <div class="why-card reveal delay-1">
+                <div class="why-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <h4>Expert Travel Assistance</h4>
+                <p>Benefit from the deep knowledge and insider access of our seasoned travel advisors.</p>
+            </div>
+            <div class="why-card reveal delay-2">
+                <div class="why-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <h4>Transparent Pricing</h4>
+                <p>No hidden fees or surprise costs. We provide clear, honest pricing for exceptional value.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                <h4>Hassle-Free Booking</h4>
+                <p>We manage all logisticsâ€”flights, hotels, transfers, and toursâ€”so you can simply relax.</p>
+            </div>
+            <div class="why-card reveal delay-1">
+                <div class="why-icon"><i class="fa-solid fa-handshake"></i></div>
+                <h4>Trusted Partners</h4>
+                <p>We only collaborate with highly vetted hotels, airlines, and local operators globally.</p>
+            </div>
+            <div class="why-card reveal delay-2">
+                <div class="why-icon"><i class="fa-solid fa-headset"></i></div>
+                <h4>24/7 Support</h4>
+                <p>Enjoy peace of mind knowing our dedicated support team is available around the clock while you travel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PREMIUM TRAVEL EXPERIENCE -->
+    <section id="premium-exp">
+        <div class="premium-content reveal">
+            <h2>Elevate Your Travel Experience</h2>
+            <p>Immerse yourself in the extraordinary. We provide access to handpicked five-star hotels, exclusive VIP experiences, private local guides, and a level of personalized service that anticipates your every need.</p>
+        </div>
+    </section>
+
+    <!-- 8. SERVICE PACKAGES -->
+    <section id="packages">
+        <div class="section-header reveal">
+            <h2>Popular Service Packages</h2>
+            <p>Choose the level of service that best fits your travel style and needs.</p>
+        </div>
+        <div class="pkg-grid">
+            <div class="pkg-card reveal delay-1">
+                <h3 class="pkg-title">Essential Journey</h3>
+                <p class="pkg-desc">Perfect for independent travelers seeking expert foundation planning.</p>
+                <div class="pkg-price">$299 <span>/trip</span></div>
+                <ul class="pkg-features">
+                    <li><i class="fa-solid fa-check"></i> Flight & Hotel Booking</li>
+                    <li><i class="fa-solid fa-check"></i> Basic Itinerary Outline</li>
+                    <li><i class="fa-solid fa-check"></i> Destination Guidebook</li>
+                    <li><i class="fa-solid fa-check"></i> Standard Support</li>
+                </ul>
+                <a href="#" class="btn-outline">Select Package</a>
+            </div>
+            <div class="pkg-card featured reveal delay-2">
+                <div class="pkg-badge">POPULAR</div>
+                <h3 class="pkg-title">Premium Escape</h3>
+                <p class="pkg-desc">Comprehensive planning for a smooth, stress-free holiday.</p>
+                <div class="pkg-price">$599 <span>/trip</span></div>
+                <ul class="pkg-features">
+                    <li><i class="fa-solid fa-check"></i> Everything in Essential</li>
+                    <li><i class="fa-solid fa-check"></i> Day-by-Day Custom Itinerary</li>
+                    <li><i class="fa-solid fa-check"></i> Restaurant & Tour Reservations</li>
+                    <li><i class="fa-solid fa-check"></i> Airport Transfers</li>
+                    <li><i class="fa-solid fa-check"></i> 24/7 Priority Support</li>
+                </ul>
+                <a href="#" class="btn-outline">Select Package</a>
+            </div>
+            <div class="pkg-card reveal delay-3">
+                <h3 class="pkg-title">Luxury Experience</h3>
+                <p class="pkg-desc">White-glove service for the ultimate VIP travel experience.</p>
+                <div class="pkg-price">$999 <span>/trip</span></div>
+                <ul class="pkg-features">
+                    <li><i class="fa-solid fa-check"></i> Everything in Premium</li>
+                    <li><i class="fa-solid fa-check"></i> Dedicated Travel Concierge</li>
+                    <li><i class="fa-solid fa-check"></i> VIP Access & Upgrades</li>
+                    <li><i class="fa-solid fa-check"></i> Private Guides & Chauffeurs</li>
+                    <li><i class="fa-solid fa-check"></i> Welcome Amenities</li>
+                </ul>
+                <a href="#" class="btn-outline">Select Package</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. TRAVELER TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="section-header reveal">
+            <h2>Traveler Testimonials</h2>
+            <p>Hear what our clients have to say about our planning services.</p>
+        </div>
+        <div class="testi-slider reveal delay-1">
+            <div class="testi-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="testi-text">"Using the Premium Escape package for our trip to Japan was the best decision. The customized itinerary allowed us to see hidden shrines we would have never found on our own. Flawless execution."</p>
+                <div class="testi-user">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Client">
+                    <h4>Sarah Jenkins</h4>
+                    <p>Traveled to Japan</p>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="testi-text">"The Luxury Experience package is worth every penny. We were treated like royalty in Santoriniâ€”room upgrades, private sunset cruises, and the concierge was always one step ahead of us."</p>
+                <div class="testi-user">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Client">
+                    <h4>Michael Chen</h4>
+                    <p>Traveled to Greece</p>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="testi-text">"Planning a family vacation used to be a headache. The team took care of all flights, connecting rooms, and kid-friendly tours in Costa Rica. It was the most relaxing family trip we've ever had."</p>
+                <div class="testi-user">
+                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Client">
+                    <h4>Emily Roberts</h4>
+                    <p>Traveled to Costa Rica</p>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FINAL CTA -->
+    <section id="final-cta">
+        <div class="cta-content reveal">
+            <h2>Letâ€™s Plan Your Next Adventure</h2>
+            <p>Stop dreaming and start packing. Reach out to our experts today to begin crafting the journey of a lifetime.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn-white">Start Planning</a>
+                <a href="#" class="btn-transparent">Explore Destinations</a>
+            </div>
+        </div>
+    </section>
+
+        <!-- FOOTER -->
+    <footer style="background: #1a1f24; color: #fff; padding: 80px 8% 30px; font-family: 'Poppins', sans-serif;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px;">
+            <div>
+                <a href="index.html" style="color: #fff; text-decoration: none; display: flex; flex-direction: column; margin-bottom: 20px;">
+                    <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 1px; margin:0; line-height:1;">STACKLY</h2>
+                </a>
+                <p style="font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 20px;">We create unforgettable travel experiences tailored to your dreams. Explore the world with premium luxury and comfort.</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0; margin:0;">
+                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About Us</a></li>
+                    <li style="margin-bottom: 15px;"><a href="services.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Our Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Travel Blog</a></li>
+                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact Us</a></li>
+                    <li style="margin-bottom: 15px;"><a href="login.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Login / Register</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Top Destinations</h4>
+                <ul style="list-style: none; padding: 0; margin:0;">
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Maldives Islands</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Paris, France</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Swiss Alps</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Dubai, UAE</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Bali, Indonesia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Newsletter</h4>
+                <p style="font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 20px;">Subscribe to our newsletter for exclusive offers and travel inspiration.</p>
+                <form style="display: flex; gap: 10px; flex-wrap: wrap;" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Email Address" required style="flex: 1; padding: 12px 15px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; background: rgba(255,255,255,0.05); color: #fff; font-family: 'Poppins', sans-serif; outline: none; min-width: 150px;">
+                    <button type="submit" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <div style="margin-top: 25px;">
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +1 (800) 123-4567</p>
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 0;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> hello@stackly.com</p>
+                </div>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2024 Stackly Agency. All Rights Reserved.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
+                <a href="#" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+<script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+

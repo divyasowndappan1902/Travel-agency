@@ -1,0 +1,512 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25a4ad;
+            --primary-dark: #1c8c94;
+            --text-main: #1a1a1a;
+            --text-muted: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --shadow-sm: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-md: 0 15px 35px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-main); overflow-x: hidden; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+
+        /* Navbar */
+        
+        header {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000 !important;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 8% !important;
+            transition: all 0.3s ease;
+ display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+        .logo h1 { font-size: 32px; font-weight: 700; letter-spacing: 1px; line-height: 1; font-family: 'Poppins', sans-serif; }
+        .logo p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-family: 'Poppins', sans-serif;}
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul li a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; transition: var(--transition); font-family: 'Poppins', sans-serif;}
+        nav ul li a:hover { color: var(--primary); }
+
+        section { padding: 100px 8%; position: relative; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 42px; color: var(--text-main); margin-bottom: 15px; font-weight: 700; }
+        .section-header p { color: var(--text-muted); font-size: 16px; max-width: 650px; margin: 0 auto; font-family: 'Poppins', sans-serif; line-height: 1.6; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* 1. CONTACT HERO */
+        #contact-hero {
+            height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            color: white; padding-top: 100px;
+        }
+        .hero-content h1 { font-size: 56px; font-weight: 700; margin-bottom: 20px; text-transform: capitalize; }
+        .hero-content p { font-size: 18px; max-width: 700px; margin: 0 auto 30px; font-family: 'Poppins', sans-serif; font-weight: 300; opacity: 0.9; line-height: 1.6; }
+        .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Poppins', sans-serif; font-size: 14px; opacity: 0.8; }
+        .breadcrumb a { color: white; text-decoration: none; transition: var(--transition); }
+        .breadcrumb a:hover { color: var(--primary); }
+
+        /* 2. CONTACT INFORMATION */
+        #contact-info { background: var(--bg-white); margin-top: -80px; padding-top: 0; z-index: 10; position: relative; padding-bottom: 80px; }
+        .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .info-card { background: white; border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid #eee; }
+        .info-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-icon { width: 70px; height: 70px; margin: 0 auto 20px; background: rgba(37, 164, 173, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--primary); transition: var(--transition); }
+        .info-card:hover .info-icon { background: var(--primary); color: white; transform: scale(1.1); }
+        .info-card h4 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .info-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        /* 3. PLAN YOUR TRIP / CONTACT FORM */
+        #contact-form { background: var(--bg-light); }
+        .form-container { display: flex; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); background: white; max-width: 1200px; margin: 0 auto; }
+        .form-img { flex: 1; position: relative; min-height: 600px; }
+        .form-img img { width: 100%; height: 100%; object-fit: cover; }
+        .form-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2)); display: flex; flex-direction: column; justify-content: flex-end; padding: 50px; color: white; }
+        .form-img-overlay h3 { font-size: 32px; margin-bottom: 15px; }
+        .form-img-overlay p { font-family: 'Poppins', sans-serif; font-size: 15px; opacity: 0.9; line-height: 1.6; }
+        .form-content { flex: 1; padding: 60px; }
+        .form-content h2 { font-size: 32px; margin-bottom: 10px; }
+        .form-content > p { color: var(--text-muted); margin-bottom: 30px; font-size: 14px; }
+        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { position: relative; }
+        .form-group.full { grid-column: span 2; }
+        .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 15px 20px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--text-main); transition: var(--transition); outline: none; background: #fafafa; }
+        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(37,164,173,0.1); }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { grid-column: span 2; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 16px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-submit:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 164, 173, 0.3); }
+
+        /* Form Feedback */
+        .form-feedback { display: none; padding: 15px; border-radius: 10px; font-size: 14px; margin-top: 20px; text-align: center; font-weight: 500; grid-column: span 2; }
+        .form-feedback.success { display: block; background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .form-feedback.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+
+        /* 4. FIND US (MAP) */
+        #find-us { background: var(--bg-white); }
+        .map-container { display: flex; align-items: center; gap: 50px; background: white; border-radius: 20px; padding: 40px; box-shadow: var(--shadow-sm); border: 1px solid #eee; }
+        .map-content { flex: 1; }
+        .map-content h3 { font-size: 32px; margin-bottom: 20px; }
+        .map-content p { color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; font-size: 15px; }
+        .address-box { background: var(--bg-light); padding: 25px; border-radius: 15px; border-left: 4px solid var(--primary); margin-bottom: 30px; }
+        .address-box h4 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+        .address-box p { font-size: 14px; color: var(--text-muted); margin: 0; }
+        .btn-directions { display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; background: transparent; color: var(--text-main); border: 2px solid #ddd; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 14px; transition: var(--transition); }
+        .btn-directions:hover { border-color: var(--primary); color: var(--primary); }
+        .map-iframe { flex: 1.5; height: 400px; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .map-iframe iframe { width: 100%; height: 100%; border: 0; }
+
+        /* 5. TRAVEL ASSISTANCE */
+        #assistance {
+            text-align: center; padding: 100px 8%; color: white;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+        .assist-header h2 { font-size: 42px; margin-bottom: 15px; color: white; }
+        .assist-header p { font-size: 16px; opacity: 0.9; margin-bottom: 50px; font-family: 'Poppins', sans-serif; }
+        .assist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .assist-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 40px 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); transition: var(--transition); }
+        .assist-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.2); border-color: white; }
+        .assist-icon { font-size: 40px; color: var(--primary); margin-bottom: 20px; }
+        .assist-card h4 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 15px; color: white; }
+
+        /* 6. FAQ SECTION */
+        #faq { background: var(--bg-light); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .accordion { border-bottom: 1px solid #ddd; }
+        .acc-btn { width: 100%; padding: 25px 0; display: flex; justify-content: space-between; align-items: center; background: none; border: none; text-align: left; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: var(--transition); }
+        .acc-btn:hover { color: var(--primary); }
+        .acc-icon { font-size: 16px; color: var(--primary); transition: transform 0.3s ease; }
+        .accordion.active .acc-icon { transform: rotate(180deg); }
+        .acc-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .acc-content p { padding-bottom: 25px; color: var(--text-muted); line-height: 1.6; font-size: 15px; }
+
+        /* 7. FINAL CTA */
+        #final-cta { text-align: center; padding: 120px 8%; background: linear-gradient(rgba(37, 164, 173, 0.85), rgba(28, 140, 148, 0.95)), url('https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed; color: white; }
+        .cta-wrapper h2 { font-size: 48px; margin-bottom: 20px; }
+        .cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
+        .btn-solid { padding: 15px 35px; background: white; color: var(--primary-dark); border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); font-family: 'Poppins', sans-serif; }
+        .btn-solid:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn-trans { padding: 15px 35px; background: transparent; color: white; border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid white; font-family: 'Poppins', sans-serif; }
+        .btn-trans:hover { background: white; color: var(--primary-dark); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .info-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-container, .map-container { flex-direction: column; }
+            .form-img { min-height: 400px; }
+            .assist-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 60px 5%; }
+            #contact-info { margin-top: -40px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .contact-form { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+            .btn-submit { grid-column: span 1; }
+            .hero-content h1 { font-size: 40px; }
+            .cta-wrapper h2 { font-size: 36px; }
+            .cta-btns { flex-direction: column; }
+            .map-iframe { height: 300px; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="assets/logo_0226.webp" alt="Travol Logo" style="height: 45px; width: auto; object-fit: contain;">
+        </a>
+        <nav style="flex: 1; display: flex; justify-content: center;">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="services.html">Service</a></li>
+                <li><a href="contact.html" style="color: var(--primary);">Contact</a></li>
+            </ul>
+        </nav>
+    
+            <div class="auth-btn" style="margin-left: auto;">
+                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);">Login</a>
+            </div>
+        </header>
+
+    <!-- 1. CONTACT HERO -->
+    <section id="contact-hero">
+        <div class="hero-content reveal">
+            <h1>Letâ€™s Start Your Journey</h1>
+            <p>Have a destination in mind? Our travel experts are ready to help you plan the perfect itinerary and turn your dream vacation into reality.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> <span>/</span> <span>Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. CONTACT INFORMATION -->
+    <section id="contact-info">
+        <div class="info-grid">
+            <div class="info-card reveal">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <h4>Our Office</h4>
+                <p>123 Travel Boulevard, Suite 500<br>New York, NY 10001</p>
+            </div>
+            <div class="info-card reveal delay-1">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <h4>Call Us</h4>
+                <p>+1 (800) 123-4567<br>+1 (800) 765-4321</p>
+            </div>
+            <div class="info-card reveal delay-2">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <h4>Email Us</h4>
+                <p>hello@stacklyagency.com<br>support@stacklyagency.com</p>
+            </div>
+            <div class="info-card reveal delay-3">
+                <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
+                <h4>Working Hours</h4>
+                <p>Mon - Fri: 9:00 AM - 6:00 PM<br>Sat - Sun: 10:00 AM - 4:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PLAN YOUR TRIP / CONTACT FORM -->
+    <section id="contact-form">
+        <div class="section-header reveal">
+            <h2>Plan Your Trip</h2>
+            <p>Fill out the form below with your travel details, and one of our dedicated agents will get back to you within 24 hours.</p>
+        </div>
+        <div class="form-container reveal delay-1">
+            <div class="form-img">
+                <img src="assets/balloons.webp" alt="Hot Air Balloons">
+                <div class="form-img-overlay">
+                    <h3>Your Adventure Awaits</h3>
+                    <p>We craft deeply personalized travel experiences that inspire, excite, and leave you with memories that last a lifetime.</p>
+                </div>
+            </div>
+            <div class="form-content">
+                <h2>Send Us an Enquiry</h2>
+                <p>Let us know how we can help you today.</p>
+                
+                <form class="contact-form" id="tripForm" onsubmit="event.preventDefault(); submitForm();">
+                    <div class="form-group">
+                        <input type="text" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Desired Destination" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Expected Travel Date (e.g. Oct 2024)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" placeholder="Number of Travelers" min="1" required>
+                    </div>
+                    <div class="form-group full">
+                        <select required>
+                            <option value="" disabled selected>Select Travel Type</option>
+                            <option value="luxury">Luxury Travel</option>
+                            <option value="honeymoon">Honeymoon Package</option>
+                            <option value="family">Family Holiday</option>
+                            <option value="adventure">Adventure Tour</option>
+                            <option value="custom">Custom Itinerary</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <textarea placeholder="Tell us more about your ideal trip..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Send Enquiry <i class="fa-solid fa-paper-plane"></i></button>
+                    
+                    <div id="formSuccess" class="form-feedback success">
+                        <i class="fa-solid fa-circle-check"></i> Thank you! Your enquiry has been sent successfully. We will contact you soon.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FIND US -->
+    <section id="find-us">
+        <div class="section-header reveal">
+            <h2>Find Us</h2>
+            <p>Come visit us at our headquarters to discuss your travel plans in person over a cup of coffee.</p>
+        </div>
+        <div class="map-container reveal delay-1">
+            <div class="map-content">
+                <h3>Our Headquarters</h3>
+                <p>Located in the heart of the city, our doors are always open to passionate travelers seeking their next adventure.</p>
+                <div class="address-box">
+                    <h4>Stackly Agency Inc.</h4>
+                    <p>123 Travel Boulevard, Suite 500<br>New York, NY 10001, United States</p>
+                </div>
+                <a href="#" class="btn-directions"><i class="fa-solid fa-map"></i> Get Directions</a>
+            </div>
+            <div class="map-iframe">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1683226920150!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. TRAVEL ASSISTANCE -->
+    <section id="assistance">
+        <div class="assist-header reveal">
+            <h2>Need Help Planning Your Trip?</h2>
+            <p>Our dedicated team is here to assist you at every step of your travel journey.</p>
+        </div>
+        <div class="assist-grid">
+            <div class="assist-card reveal">
+                <div class="assist-icon"><i class="fa-solid fa-headset"></i></div>
+                <h4>Talk to a Travel Expert</h4>
+                <p style="font-size: 14px; opacity: 0.9;">Schedule a free 30-minute consultation call with one of our specialists.</p>
+            </div>
+            <div class="assist-card reveal delay-1">
+                <div class="assist-icon"><i class="fa-solid fa-map"></i></div>
+                <h4>Request a Custom Itinerary</h4>
+                <p style="font-size: 14px; opacity: 0.9;">Tell us your preferences and we'll design a trip exclusively for you.</p>
+            </div>
+            <div class="assist-card reveal delay-2">
+                <div class="assist-icon"><i class="fa-solid fa-ticket"></i></div>
+                <h4>Get Booking Assistance</h4>
+                <p style="font-size: 14px; opacity: 0.9;">Encountering issues with a booking? Our support team is available 24/7.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FAQ SECTION -->
+    <section id="faq">
+        <div class="section-header reveal">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find quick answers to common questions about booking, payments, and travel support.</p>
+        </div>
+        <div class="faq-container reveal delay-1">
+            <div class="accordion">
+                <button class="acc-btn">How far in advance should I book my trip? <i class="fa-solid fa-chevron-down acc-icon"></i></button>
+                <div class="acc-content">
+                    <p>For international trips, we recommend booking at least 3-6 months in advance to secure the best rates on flights and accommodations. For highly customized luxury tours, 6-9 months is ideal.</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="acc-btn">Are custom travel packages more expensive? <i class="fa-solid fa-chevron-down acc-icon"></i></button>
+                <div class="acc-content">
+                    <p>Not necessarily. While they are tailored to your specific needs, our travel experts leverage industry partnerships to secure exclusive rates, often matching or beating off-the-shelf package prices while providing higher value.</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="acc-btn">What is your cancellation and refund policy? <i class="fa-solid fa-chevron-down acc-icon"></i></button>
+                <div class="acc-content">
+                    <p>Our cancellation policies vary depending on the specific airline, hotel, and tour operator booked for your itinerary. We highly recommend purchasing comprehensive travel insurance, which we can assist you with, to protect your investment.</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="acc-btn">What payment methods do you accept? <i class="fa-solid fa-chevron-down acc-icon"></i></button>
+                <div class="acc-content">
+                    <p>We accept all major credit cards (Visa, MasterCard, American Express), bank wire transfers, and selected secure online payment gateways for your convenience.</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="acc-btn">What kind of travel support do you offer during my trip? <i class="fa-solid fa-chevron-down acc-icon"></i></button>
+                <div class="acc-content">
+                    <p>Every client receives 24/7 dedicated support via phone, email, and WhatsApp while traveling. If you encounter flight delays, need a last-minute restaurant reservation, or face an emergency, our team is just a call away.</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="acc-btn">Do you assist with international visas and passports? <i class="fa-solid fa-chevron-down acc-icon"></i></button>
+                <div class="acc-content">
+                    <p>Yes. We provide comprehensive guidance on visa requirements for your destination and can connect you with expedited passport and visa processing services to ensure you have all required documentation before departure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FINAL CTA -->
+    <section id="final-cta">
+        <div class="cta-wrapper reveal">
+            <h2>Your Next Adventure Starts Here.</h2>
+            <p style="font-family: 'Poppins', sans-serif; font-size: 18px; margin-bottom: 40px; opacity: 0.9;">Ready to explore the world? Connect with us today and let's craft the journey of a lifetime.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn-solid">Plan My Trip</a>
+                <a href="#" class="btn-trans">Explore Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Accordion Logic
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(acc => {
+            const btn = acc.querySelector('.acc-btn');
+            const content = acc.querySelector('.acc-content');
+            
+            btn.addEventListener('click', () => {
+                const isActive = acc.classList.contains('active');
+                
+                // Close all others
+                accordions.forEach(otherAcc => {
+                    otherAcc.classList.remove('active');
+                    otherAcc.querySelector('.acc-content').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    acc.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Form Submit Simulation
+        function submitForm() {
+            const btn = document.querySelector('.btn-submit');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                document.getElementById('tripForm').reset();
+                btn.innerHTML = 'Send Enquiry <i class="fa-solid fa-paper-plane"></i>';
+                btn.disabled = false;
+                const successMsg = document.getElementById('formSuccess');
+                successMsg.classList.add('success');
+                
+                setTimeout(() => {
+                    successMsg.classList.remove('success');
+                }, 5000);
+            }, 1500);
+        }
+    </script>
+    <!-- FOOTER -->
+    <footer style="background: #1a1f24; color: #fff; padding: 80px 8% 30px; font-family: 'Poppins', sans-serif;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px;">
+            <div>
+                <a href="index.html" style="color: #fff; text-decoration: none; display: flex; flex-direction: column; margin-bottom: 20px;">
+                    <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 1px; margin:0; line-height:1;">STACKLY</h2>
+                </a>
+                <p style="font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 20px;">We create unforgettable travel experiences tailored to your dreams. Explore the world with premium luxury and comfort.</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0; margin:0;">
+                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About Us</a></li>
+                    <li style="margin-bottom: 15px;"><a href="services.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Our Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Travel Blog</a></li>
+                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact Us</a></li>
+                    <li style="margin-bottom: 15px;"><a href="login.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Login / Register</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Top Destinations</h4>
+                <ul style="list-style: none; padding: 0; margin:0;">
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Maldives Islands</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Paris, France</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Swiss Alps</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Dubai, UAE</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Bali, Indonesia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Newsletter</h4>
+                <p style="font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 20px;">Subscribe to our newsletter for exclusive offers and travel inspiration.</p>
+                <form style="display: flex; gap: 10px; flex-wrap: wrap;" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Email Address" required style="flex: 1; padding: 12px 15px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; background: rgba(255,255,255,0.05); color: #fff; font-family: 'Poppins', sans-serif; outline: none; min-width: 150px;">
+                    <button type="submit" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <div style="margin-top: 25px;">
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +1 (800) 123-4567</p>
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 0;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> hello@stackly.com</p>
+                </div>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2024 Stackly Agency. All Rights Reserved.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
+                <a href="#" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

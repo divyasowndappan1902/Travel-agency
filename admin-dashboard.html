@@ -1,0 +1,588 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25a4ad;
+            --primary-dark: #1c8c94;
+            --bg: #f4f7f6;
+            --sidebar-bg: #1a1f24;
+            --card-bg: #ffffff;
+            --text-main: #333;
+            --text-muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sidebar */
+        .sidebar { width: 260px; background: var(--sidebar-bg); color: #fff; display: flex; flex-direction: column; transition: 0.3s; }
+        .sidebar-logo { padding: 25px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-logo h2 { font-size: 24px; font-weight: 700; letter-spacing: 1px; color: white; }
+        .sidebar-logo span { color: var(--primary); }
+        .sidebar-menu { flex: 1; padding: 20px 0; overflow-y: auto; }
+        .menu-item { display: flex; align-items: center; padding: 15px 25px; color: #a0a5b1; text-decoration: none; transition: 0.3s; font-size: 14px; font-weight: 500; }
+        .menu-item:hover, .menu-item.active { background: rgba(255,255,255,0.05); color: #fff; border-left: 4px solid var(--primary); }
+        .menu-item i { width: 25px; font-size: 18px; }
+        .sidebar-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        /* Main Content */
+        .main-content { padding-top: 80px;  flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* Header */
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 260px; /* sidebar width */
+            right: 0;
+            z-index: 1000;
+            background: var(--card-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+        .search-bar { display: flex; align-items: center; background: var(--bg); padding: 10px 20px; border-radius: 30px; width: 300px; }
+        .search-bar input { border: none; background: transparent; outline: none; margin-left: 10px; width: 100%; color: var(--text-main); font-size: 13px; }
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        .header-actions i { font-size: 18px; color: var(--text-muted); cursor: pointer; }
+        .admin-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .admin-profile img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .admin-info h4 { font-size: 14px; color: var(--text-main); }
+        .admin-info p { font-size: 11px; color: var(--text-muted); }
+
+        /* Dashboard Body */
+        .dashboard-body { flex: 1; padding: 30px; overflow-y: auto; }
+        .page-header { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .page-header h2 { font-size: 24px; color: var(--text-main); }
+        .btn-add { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 30px; }
+        .stat-card { background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: space-between; }
+        .stat-info h4 { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; }
+        .stat-info h2 { font-size: 28px; color: var(--text-main); }
+        .stat-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .icon-blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .icon-green { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .icon-purple { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .icon-orange { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+
+        /* Content Layout */
+        .dashboard-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+        
+        .card { background: var(--card-bg); border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); padding: 25px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .card-title { font-size: 16px; font-weight: 600; color: var(--text-main); }
+        .view-all { font-size: 12px; color: var(--primary); text-decoration: none; font-weight: 500; }
+
+        /* Table */
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 12px 15px; border-bottom: 1px solid #eee; color: var(--text-muted); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 13px; color: var(--text-main); }
+        .user-cell { display: flex; align-items: center; gap: 10px; }
+        .user-cell img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+        .status { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .status.confirmed { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .status.pending { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        .status.cancelled { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        /* Popular Packages List */
+        .package-list { display: flex; flex-direction: column; gap: 15px; }
+        .package-item { display: flex; align-items: center; gap: 15px; padding: 10px; border: 1px solid #eee; border-radius: 10px; transition: 0.3s; }
+        .package-item:hover { border-color: var(--primary); box-shadow: 0 5px 15px rgba(37,164,173,0.1); }
+        .package-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+        .package-info { flex: 1; }
+        .package-info h4 { font-size: 13px; color: var(--text-main); margin-bottom: 4px; }
+        .package-info p { font-size: 11px; color: var(--text-muted); }
+        .package-price { font-size: 14px; font-weight: 600; color: var(--primary); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <img src="assets/logo_0226.webp" alt="Travol Logo" style="height: 35px; width: auto; object-fit: contain;">
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#" class="menu-item active"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-users"></i> Customers</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-map-location-dot"></i> Packages</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-wallet"></i> Payments</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="login.html" class="menu-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+                <input type="text" placeholder="Search bookings, customers, packages...">
+            </div>
+            <div class="header-actions">
+                <i class="fa-regular fa-bell"></i>
+                <i class="fa-regular fa-message"></i>
+                <div class="admin-profile">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Admin">
+                    <div class="admin-info">
+                        <h4 id="adminProfileName">James Wilson</h4>
+                        <p id="adminProfileEmail">Super Admin</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <div class="page-header">
+                <h2>Dashboard Overview</h2>
+                <button class="btn-add"><i class="fa-solid fa-plus"></i> Add New Package</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Total Revenue</h4>
+                        <h2>$124,500</h2>
+                    </div>
+                    <div class="stat-icon icon-blue"><i class="fa-solid fa-dollar-sign"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Total Bookings</h4>
+                        <h2>1,245</h2>
+                    </div>
+                    <div class="stat-icon icon-green"><i class="fa-solid fa-calendar-check"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>New Customers</h4>
+                        <h2>382</h2>
+                    </div>
+                    <div class="stat-icon icon-purple"><i class="fa-solid fa-users"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h4>Active Packages</h4>
+                        <h2>45</h2>
+                    </div>
+                    <div class="stat-icon icon-orange"><i class="fa-solid fa-map"></i></div>
+                </div>
+            </div>
+
+            <div class="dashboard-layout">
+                <!-- Recent Bookings Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Recent Bookings</span>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Destination</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
+                                            <span>Sarah Jenkins</span>
+                                        </div>
+                                    </td>
+                                    <td>Maldives Escape</td>
+                                    <td>Oct 15, 2024</td>
+                                    <td>$2,499</td>
+                                    <td><span class="status confirmed">Confirmed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
+                                            <span>Michael Chen</span>
+                                        </div>
+                                    </td>
+                                    <td>Swiss Alps Tour</td>
+                                    <td>Nov 02, 2024</td>
+                                    <td>$1,850</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
+                                            <span>Emily Roberts</span>
+                                        </div>
+                                    </td>
+                                    <td>Paris Honeymoon</td>
+                                    <td>Dec 10, 2024</td>
+                                    <td>$3,200</td>
+                                    <td><span class="status confirmed">Confirmed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-cell">
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User">
+                                            <span>David Smith</span>
+                                        </div>
+                                    </td>
+                                    <td>Bali Adventure</td>
+                                    <td>Sep 28, 2024</td>
+                                    <td>$1,450</td>
+                                    <td><span class="status cancelled">Cancelled</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Popular Packages -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Top Packages</span>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="package-list">
+                        <div class="package-item">
+                            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Package">
+                            <div class="package-info">
+                                <h4>Maldives Paradise</h4>
+                                <p>245 Bookings</p>
+                            </div>
+                            <div class="package-price">$2,499</div>
+                        </div>
+                        <div class="package-item">
+                            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Package">
+                            <div class="package-info">
+                                <h4>Paris Getaway</h4>
+                                <p>180 Bookings</p>
+                            </div>
+                            <div class="package-price">$1,899</div>
+                        </div>
+                        <div class="package-item">
+                            <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Package">
+                            <div class="package-info">
+                                <h4>Swiss Alps Ski</h4>
+                                <p>132 Bookings</p>
+                            </div>
+                            <div class="package-price">$2,100</div>
+                        </div>
+                        <div class="package-item">
+                            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Package">
+                            <div class="package-info">
+                                <h4>Venice Romance</h4>
+                                <p>98 Bookings</p>
+                            </div>
+                            <div class="package-price">$1,650</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuItems = document.querySelectorAll('.sidebar-menu .menu-item');
+        const dashboardBody = document.querySelector('.dashboard-body');
+        const originalContent = dashboardBody.innerHTML;
+
+        const storedName = localStorage.getItem('userName');
+        const storedEmail = localStorage.getItem('userEmail');
+        
+        if (storedName) {
+            document.getElementById('adminProfileName').textContent = storedName;
+        }
+        if (storedEmail) {
+            document.getElementById('adminProfileEmail').textContent = storedEmail;
+        }
+
+        const pageContents = {
+            'Bookings': `
+                <div class="page-header">
+                    <h2>Manage Bookings</h2>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i> New Booking</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Total Bookings</h4><h2>1,245</h2></div>
+                        <div class="stat-icon icon-blue"><i class="fa-solid fa-calendar-check"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Pending</h4><h2>124</h2></div>
+                        <div class="stat-icon icon-orange"><i class="fa-solid fa-clock"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Confirmed</h4><h2>980</h2></div>
+                        <div class="stat-icon icon-green"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Cancelled</h4><h2>141</h2></div>
+                        <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i class="fa-solid fa-xmark"></i></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title">All Bookings</span></div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>ID</th><th>Customer</th><th>Package</th><th>Date</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>#BK-1001</td><td>Sarah Jenkins</td><td>Maldives Escape</td><td>Oct 15, 2024</td><td><span class="status confirmed">Confirmed</span></td></tr>
+                                <tr><td>#BK-1002</td><td>Michael Chen</td><td>Swiss Alps Tour</td><td>Nov 02, 2024</td><td><span class="status pending">Pending</span></td></tr>
+                                <tr><td>#BK-1003</td><td>David Smith</td><td>Bali Adventure</td><td>Sep 28, 2024</td><td><span class="status cancelled">Cancelled</span></td></tr>
+                                <tr><td>#BK-1004</td><td>Emma Wilson</td><td>Paris Getaway</td><td>Oct 20, 2024</td><td><span class="status confirmed">Confirmed</span></td></tr>
+                                <tr><td>#BK-1005</td><td>James Brown</td><td>Venice Romance</td><td>Nov 15, 2024</td><td><span class="status pending">Pending</span></td></tr>
+                                <tr><td>#BK-1006</td><td>Olivia Davis</td><td>Maldives Escape</td><td>Dec 05, 2024</td><td><span class="status confirmed">Confirmed</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+            'Customers': `
+                <div class="page-header">
+                    <h2>Customer Directory</h2>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Total Customers</h4><h2>3,842</h2></div>
+                        <div class="stat-icon icon-purple"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>New This Month</h4><h2>382</h2></div>
+                        <div class="stat-icon icon-green"><i class="fa-solid fa-user-plus"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Active</h4><h2>2,100</h2></div>
+                        <div class="stat-icon icon-blue"><i class="fa-solid fa-user-check"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Inactive</h4><h2>1,742</h2></div>
+                        <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i class="fa-solid fa-user-minus"></i></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title">Customer List</span></div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Total Spent</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>Sarah Jenkins</td><td>sarah.j@example.com</td><td>+1 234 567 8900</td><td>$5,400</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>Michael Chen</td><td>m.chen@example.com</td><td>+1 987 654 3210</td><td>$1,850</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>David Smith</td><td>david.s@example.com</td><td>+1 555 123 4567</td><td>$0</td><td><span class="status pending">Inactive</span></td></tr>
+                                <tr><td>Emma Wilson</td><td>emma.w@example.com</td><td>+1 333 444 5555</td><td>$2,100</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>James Brown</td><td>j.brown@example.com</td><td>+1 222 333 4444</td><td>$3,500</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>Olivia Davis</td><td>olivia.d@example.com</td><td>+1 777 888 9999</td><td>$1,200</td><td><span class="status confirmed">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+            'Packages': `
+                <div class="page-header">
+                    <h2>Tour Packages</h2>
+                    <button class="btn-add"><i class="fa-solid fa-plus"></i> Create Package</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Total Packages</h4><h2>120</h2></div>
+                        <div class="stat-icon icon-orange"><i class="fa-solid fa-map-location-dot"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Active Packages</h4><h2>45</h2></div>
+                        <div class="stat-icon icon-green"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Avg. Price</h4><h2>$1,850</h2></div>
+                        <div class="stat-icon icon-blue"><i class="fa-solid fa-tag"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Drafts</h4><h2>12</h2></div>
+                        <div class="stat-icon" style="background: rgba(100, 116, 139, 0.1); color: #64748b;"><i class="fa-solid fa-file"></i></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title">Package Inventory</span></div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Package Name</th><th>Duration</th><th>Price</th><th>Bookings</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>Maldives Escape</td><td>7 Days, 6 Nights</td><td>$2,499</td><td>245</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>Swiss Alps Tour</td><td>5 Days, 4 Nights</td><td>$1,850</td><td>132</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>Bali Adventure</td><td>10 Days, 9 Nights</td><td>$1,450</td><td>0</td><td><span class="status pending">Draft</span></td></tr>
+                                <tr><td>Paris Getaway</td><td>4 Days, 3 Nights</td><td>$1,899</td><td>180</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>Venice Romance</td><td>5 Days, 4 Nights</td><td>$1,650</td><td>98</td><td><span class="status confirmed">Active</span></td></tr>
+                                <tr><td>Tokyo Explorer</td><td>8 Days, 7 Nights</td><td>$2,800</td><td>55</td><td><span class="status confirmed">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+            'Payments': `
+                <div class="page-header">
+                    <h2>Payment Transactions</h2>
+                    <button class="btn-add"><i class="fa-solid fa-file-invoice"></i> Generate Invoice</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Total Revenue</h4><h2>$124,500</h2></div>
+                        <div class="stat-icon icon-blue"><i class="fa-solid fa-dollar-sign"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>This Month</h4><h2>$32,400</h2></div>
+                        <div class="stat-icon icon-green"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Pending</h4><h2>$4,500</h2></div>
+                        <div class="stat-icon icon-orange"><i class="fa-solid fa-clock"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Refunded</h4><h2>$1,200</h2></div>
+                        <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title">Recent Transactions</span></div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>Transaction ID</th><th>Customer</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>#TXN-9021</td><td>Sarah Jenkins</td><td>Oct 15, 2024</td><td>$2,499</td><td><span class="status confirmed">Completed</span></td></tr>
+                                <tr><td>#TXN-9022</td><td>Michael Chen</td><td>Nov 02, 2024</td><td>$1,850</td><td><span class="status pending">Processing</span></td></tr>
+                                <tr><td>#TXN-9023</td><td>David Smith</td><td>Sep 28, 2024</td><td>$1,450</td><td><span class="status cancelled">Refunded</span></td></tr>
+                                <tr><td>#TXN-9024</td><td>Emma Wilson</td><td>Oct 20, 2024</td><td>$1,899</td><td><span class="status confirmed">Completed</span></td></tr>
+                                <tr><td>#TXN-9025</td><td>James Brown</td><td>Nov 15, 2024</td><td>$1,650</td><td><span class="status pending">Processing</span></td></tr>
+                                <tr><td>#TXN-9026</td><td>Olivia Davis</td><td>Dec 05, 2024</td><td>$2,499</td><td><span class="status confirmed">Completed</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+            'Analytics': `
+                <div class="page-header">
+                    <h2>Analytics & Reports</h2>
+                    <button class="btn-add"><i class="fa-solid fa-download"></i> Download Report</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Website Visits</h4><h2>45,210</h2></div>
+                        <div class="stat-icon icon-purple"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Conversion Rate</h4><h2>4.2%</h2></div>
+                        <div class="stat-icon icon-green"><i class="fa-solid fa-chart-pie"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Bounce Rate</h4><h2>32.5%</h2></div>
+                        <div class="stat-icon icon-orange"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info"><h4>Avg. Session</h4><h2>4m 12s</h2></div>
+                        <div class="stat-icon icon-blue"><i class="fa-solid fa-stopwatch"></i></div>
+                    </div>
+                </div>
+                <div class="dashboard-layout">
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Revenue Growth</span></div>
+                        <div style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f9fafb; border-radius: 8px; overflow: hidden;">
+                            <img src="assets/revenue_chart.webp" alt="Revenue Growth Chart" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Top Destinations</span></div>
+                        <div class="package-list">
+                            <div class="package-item"><div class="package-info"><h4>1. Maldives</h4><p>245 Bookings</p></div><div class="package-price">28%</div></div>
+                            <div class="package-item"><div class="package-info"><h4>2. Paris</h4><p>180 Bookings</p></div><div class="package-price">21%</div></div>
+                            <div class="package-item"><div class="package-info"><h4>3. Swiss Alps</h4><p>132 Bookings</p></div><div class="package-price">15%</div></div>
+                            <div class="package-item"><div class="package-info"><h4>4. Venice</h4><p>98 Bookings</p></div><div class="package-price">11%</div></div>
+                            <div class="package-item"><div class="package-info"><h4>5. Tokyo</h4><p>55 Bookings</p></div><div class="package-price">6%</div></div>
+                            <div class="package-item"><div class="package-info"><h4>6. Bali</h4><p>42 Bookings</p></div><div class="package-price">5%</div></div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'Settings': `
+                <div class="page-header">
+                    <h2>Platform Settings</h2>
+                    <button class="btn-add"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                </div>
+                <div class="dashboard-layout">
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">General Settings</span></div>
+                        <form style="display: flex; flex-direction: column; gap: 15px;">
+                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Platform Name</label><input type="text" value="Stackly" style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"></div>
+                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Support Email</label><input type="email" value="support@stackly.com" style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"></div>
+                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Currency</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>USD ($)</option><option>EUR (€)</option></select></div>
+                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Timezone</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>UTC (GMT+0)</option><option>EST (GMT-5)</option></select></div>
+                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Date Format</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>MM/DD/YYYY</option><option>DD/MM/YYYY</option></select></div>
+                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Language</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>English</option><option>Spanish</option></select></div>
+                            <button type="submit" class="btn-add" style="margin-top: 10px; align-self: flex-start;">Save Settings</button>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">System Status</span></div>
+                        <div class="package-list">
+                            <div class="package-item"><div class="package-info"><h4>Database</h4><p>Connected & Healthy</p></div><i class="fa-solid fa-circle-check" style="color: #10b981;"></i></div>
+                            <div class="package-item"><div class="package-info"><h4>Payment Gateway</h4><p>Stripe Active</p></div><i class="fa-solid fa-circle-check" style="color: #10b981;"></i></div>
+                            <div class="package-item"><div class="package-info"><h4>Email Server</h4><p>SMTP Running</p></div><i class="fa-solid fa-circle-check" style="color: #10b981;"></i></div>
+                            <div class="package-item"><div class="package-info"><h4>Storage</h4><p>AWS S3 Connected</p></div><i class="fa-solid fa-circle-check" style="color: #10b981;"></i></div>
+                            <div class="package-item"><div class="package-info"><h4>CDN Cache</h4><p>Cloudflare Active</p></div><i class="fa-solid fa-circle-check" style="color: #10b981;"></i></div>
+                            <div class="package-item"><div class="package-info"><h4>API Services</h4><p>All Endpoints Operational</p></div><i class="fa-solid fa-circle-check" style="color: #10b981;"></i></div>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                const sectionName = item.textContent.trim();
+                if (sectionName === 'Dashboard') {
+                    dashboardBody.innerHTML = originalContent;
+                } else if (pageContents[sectionName]) {
+                    dashboardBody.innerHTML = pageContents[sectionName];
+                } else {
+                    const iconClass = item.querySelector('i') ? item.querySelector('i').className : '';
+                    dashboardBody.innerHTML = `
+                        <div style="background: white; padding: 60px 40px; border-radius: 10px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                            <i class="${iconClass}" style="font-size: 64px; color: var(--primary); margin-bottom: 20px;"></i>
+                            <h2>${sectionName}</h2>
+                            <p style="color: var(--text-muted); margin-top: 10px;">The ${sectionName} module is currently under development. Please check back later.</p>
+                        </div>
+                    `;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+

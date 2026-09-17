@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly - Explore the World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+        }
+
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        
+        header {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000 !important;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 8% !important;
+            transition: all 0.3s ease;
+ display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo p {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #25a4ad;
+        }
+
+        .hero-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+            margin-top: -50px;
+        }
+
+        .hero-content h3 {
+            font-size: 14px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero-content h2 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 2px #fff;
+        }
+
+        .search-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 1000px;
+            border-radius: 5px;
+        }
+
+        .search-form {
+            display: flex;
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            flex: 1;
+            border-right: 1px solid #eee;
+            padding: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group:last-child {
+            border-right: none;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #555;
+            background: transparent;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-group i.fa-chevron-down {
+            position: absolute;
+            right: 20px;
+            color: #999;
+            pointer-events: none;
+            font-size: 12px;
+        }
+
+        .btn-search {
+            background: #25a4ad;
+            color: #fff;
+            border: none;
+            padding: 0 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 0.8;
+        }
+
+        .btn-search:hover {
+            background: #1c8c94;
+        }
+
+/* --- NEW SECTIONS CSS --- */
+:root {
+    --primary: #25a4ad;
+    --primary-dark: #1c8c94;
+    --text-main: #333;
+    --text-muted: #666;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --transition: all 0.3s ease;
+    --shadow-sm: 0 5px 15px rgba(0,0,0,0.05);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.1);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+section {
+    padding: 100px 8%;
+    overflow: hidden;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.section-header h2 {
+    font-size: 36px;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+.section-header p {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.fade-up {
+    opacity: 0;
+}
+.fade-up.visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* 1. Popular Destinations */
+#destinations { background: var(--bg-white); }
+.dest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+.dest-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 400px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+.dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+}
+.dest-card:hover img {
+    transform: scale(1.1);
+}
+.dest-info h3 { font-size: 24px; margin-bottom: 5px; }
+.dest-info p { font-size: 14px; opacity: 0.8; margin-bottom: 15px; }
+.btn-explore {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+.dest-card:hover .btn-explore {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2. Featured Packages */
+#packages { background: var(--bg-light); }
+.package-slider {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+.package-slider::-webkit-scrollbar { display: none; }
+.pkg-card {
+    flex: 0 0 350px;
+    background: var(--bg-white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    scroll-snap-align: start;
+    transition: var(--transition);
+}
+.pkg-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
+.pkg-img { height: 220px; width: 100%; object-fit: cover; }
+.pkg-content { padding: 25px; }
+.pkg-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.pkg-title { font-size: 20px; font-weight: 600; color: var(--text-main); }
+.pkg-rating { color: #f39c12; font-size: 14px; }
+.pkg-details { color: var(--text-muted); font-size: 14px; margin-bottom: 15px; display: flex; gap: 15px;}
+.pkg-details i { color: var(--primary); margin-right: 5px; }
+.pkg-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
+.pkg-price { font-size: 22px; font-weight: 700; color: var(--primary); }
+.pkg-price span { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+.btn-view { padding: 8px 15px; background: transparent; border: 1px solid var(--primary); color: var(--primary); border-radius: 5px; cursor: pointer; transition: var(--transition); }
+.btn-view:hover { background: var(--primary); color: white; }
+
+/* 3. Explore By Style */
+#styles { background: var(--bg-white); }
+.style-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.style-card {
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+}
+.style-img-wrapper {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    border: 5px solid white;
+    transition: var(--transition);
+}
+.style-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.style-card:hover .style-img-wrapper {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+.style-card:hover img { transform: scale(1.1); }
+.style-card h4 { color: var(--text-main); font-weight: 600; font-size: 16px; }
+
+/* 4. Trending Getaways (Bento Grid) */
+#trending { background: var(--bg-light); }
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    gap: 20px;
+}
+.bento-item {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+}
+.bento-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+.bento-item:hover img { transform: scale(1.05); }
+.bento-large { grid-column: span 2; grid-row: span 2; }
+.bento-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+}
+.bento-content h3 { font-size: 22px; margin-bottom: 5px; }
+.bento-large .bento-content h3 { font-size: 32px; }
+.bento-content p { font-size: 14px; opacity: 0.9; margin-bottom: 10px; }
+.bento-btn { padding: 8px 15px; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+.bento-btn:hover { background: var(--primary); border-color: var(--primary); }
+
+/* 5. Why Choose Us */
+#choose-us { background: var(--bg-white); }
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.feature-card {
+    padding: 40px 30px;
+    border-radius: 15px;
+    background: var(--bg-white);
+    border: 1px solid #eee;
+    text-align: center;
+    transition: var(--transition);
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+.feature-icon {
+    width: 80px; height: 80px;
+    background: rgba(37, 164, 173, 0.1);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+    transition: var(--transition);
+}
+.feature-card:hover .feature-icon { background: var(--primary); color: white; }
+.feature-card h4 { font-size: 20px; margin-bottom: 15px; color: var(--text-main); }
+.feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+/* 6. Exclusive Offers */
+#offers {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: white;
+}
+#offers .section-header h2, #offers .section-header p { color: white; }
+.offers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.offer-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+.offer-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.15); }
+.discount-badge {
+    position: absolute; top: 20px; right: -30px;
+    background: #e74c3c; color: white;
+    padding: 5px 40px; transform: rotate(45deg);
+    font-weight: 700; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.offer-card h3 { font-size: 24px; margin-bottom: 10px; }
+.offer-card p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
+.offer-price { font-size: 28px; font-weight: 700; margin-bottom: 20px; display: block; }
+.offer-price del { font-size: 16px; opacity: 0.7; font-weight: 400; margin-left: 10px; }
+.btn-book { padding: 12px 25px; background: white; color: #1a2a6c; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; }
+.btn-book:hover { background: var(--primary); color: white; }
+
+/* 7. How Your Journey Works */
+#journey { background: var(--bg-white); }
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.steps-container::before {
+    content: '';
+    position: absolute;
+    top: 40px; left: 50px; right: 50px;
+    height: 2px;
+    background: #eee;
+    z-index: 1;
+}
+.step {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding: 0 15px;
+}
+.step-icon {
+    width: 80px; height: 80px;
+    background: white; border: 2px dashed var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: var(--primary);
+    margin: 0 auto 20px;
+    transition: var(--transition);
+}
+.step:hover .step-icon { background: var(--primary); color: white; border-style: solid; transform: scale(1.1); }
+.step-num { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 5px; display: block; }
+.step h4 { font-size: 18px; color: var(--text-main); margin-bottom: 10px; }
+.step p { font-size: 14px; color: var(--text-muted); }
+
+/* 8. Gallery */
+#gallery { background: var(--bg-light); }
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 250px;
+    grid-auto-flow: dense;
+    gap: 15px;
+}
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.gallery-item:nth-child(2n) { grid-row: span 2; }
+.gallery-item:nth-child(5n) { grid-column: span 2; grid-row: span 2; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: 0.5s; color: white; text-align: center;
+}
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay h4 { font-size: 24px; transform: translateY(20px); transition: 0.5s; }
+.gallery-overlay p { font-size: 14px; transform: translateY(20px); transition: 0.5s; opacity: 0; }
+.gallery-item:hover .gallery-overlay h4 { transform: translateY(0); }
+.gallery-item:hover .gallery-overlay p { transform: translateY(0); opacity: 1; transition-delay: 0.1s; }
+
+/* 9. Testimonials */
+#testimonials {
+    background: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+    position: relative;
+}
+#testimonials::before { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.7); }
+#testimonials .section-header, #testimonials .section-header h2, #testimonials .section-header p { position: relative; color: white; z-index: 2; }
+.testimonial-slider {
+    display: flex; gap: 30px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px 0;
+    position: relative; z-index: 2; scrollbar-width: none;
+}
+.testimonial-slider::-webkit-scrollbar { display: none; }
+.testi-card {
+    flex: 0 0 400px; scroll-snap-align: center;
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 15px;
+    padding: 40px; color: white;
+}
+.testi-quote { font-size: 40px; color: var(--primary); opacity: 0.5; margin-bottom: 20px; line-height: 0; }
+.testi-text { font-size: 16px; font-style: italic; margin-bottom: 25px; line-height: 1.6; }
+.testi-author { display: flex; align-items: center; gap: 15px; }
+.testi-author img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); }
+.testi-author h4 { font-size: 18px; margin-bottom: 5px; }
+.testi-author p { font-size: 12px; opacity: 0.8; }
+.stars { color: #fdbb2d; font-size: 14px; }
+
+/* 10. Statistics */
+#stats { background: var(--bg-white); }
+.stats-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
+.stat-item { text-align: center; }
+.stat-number { font-size: 48px; font-weight: 800; color: var(--primary); margin-bottom: 10px; display: block; }
+.stat-label { font-size: 16px; color: var(--text-main); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+/* 11. Travel Journal */
+#journal { background: var(--bg-light); }
+.journal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.blog-card { background: var(--bg-white); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); display: flex; flex-direction: column; }
+.blog-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
+.blog-img-wrapper { position: relative; height: 220px; overflow: hidden; }
+.blog-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.blog-card:hover .blog-img-wrapper img { transform: scale(1.1); }
+.blog-category { position: absolute; top: 20px; left: 20px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+.blog-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
+.blog-date { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; display: block; }
+.blog-title { font-size: 20px; color: var(--text-main); margin-bottom: 15px; font-weight: 700; transition: 0.3s; cursor: pointer; }
+.blog-title:hover { color: var(--primary); }
+.blog-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+.btn-read { background: var(--primary); color: #fff; font-weight: 600; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 5px; transition: 0.3s; align-self: flex-start; margin-top: auto; }
+
+.btn-read:hover { background: var(--primary-dark); color: #fff; }
+
+
+/* 12. Final CTA */
+#cta {
+    position: relative;
+    padding: 120px 8%;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+    text-align: center;
+    color: white;
+}
+#cta::before { content:''; position:absolute; inset:0; background: linear-gradient(rgba(0,0,0,0.4), rgba(37, 164, 173, 0.7)); }
+.cta-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; animation: float 6s ease-in-out infinite; }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
+.cta-content h2 { font-size: 48px; font-weight: 800; margin-bottom: 20px; }
+.cta-content p { font-size: 18px; margin-bottom: 40px; opacity: 0.9; }
+.btn-cta { padding: 15px 40px; background: white; color: var(--primary-dark); font-size: 18px; font-weight: 700; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,0,0,0.3); }
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px; }
+    .bento-large { grid-column: span 2; grid-row: span 1; }
+    .steps-container { flex-direction: column; gap: 40px; }
+    .steps-container::before { top: 0; bottom: 0; left: 50px; width: 2px; height: auto; }
+    .step { display: flex; text-align: left; align-items: flex-start; gap: 20px; }
+    .step-icon { margin: 0; flex-shrink: 0; }
+}
+@media (max-width: 768px) {
+    section { padding: 60px 5%; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-large { grid-column: span 1; }
+    .gallery-item:nth-child(5n) { grid-column: span 1; }
+    .stats-container { flex-direction: column; gap: 40px; }
+    .cta-content h2 { font-size: 36px; }
+    .testi-card { flex: 0 0 300px; padding: 25px; }
+    .pkg-card { flex: 0 0 300px; }
+}
+    
+        .hero-slider {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+        }
+        .hero-slider .slide {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeSlide 20s infinite;
+        }
+        .hero-slider .slide:nth-child(1) { animation-delay: 0s; }
+        .hero-slider .slide:nth-child(2) { animation-delay: 5s; }
+        .hero-slider .slide:nth-child(3) { animation-delay: 10s; }
+        .hero-slider .slide:nth-child(4) { animation-delay: 15s; }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: scale(1); }
+            5% { opacity: 1; }
+            25% { opacity: 1; transform: scale(1.05); }
+            30% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="hero-slider">
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+        </div>
+        <header>
+            <a href="#" class="logo">
+                <img src="assets/logo_0226.webp" alt="Travol Logo" style="height: 45px; width: auto; object-fit: contain;">
+            </a>
+            <nav style="flex: 1; display: flex; justify-content: center;">
+                <ul>
+                    <li><a href="index.html" style="color: var(--primary);">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="services.html">Service</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        
+            <div class="auth-btn" style="margin-left: auto;">
+                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);">Login</a>
+            </div>
+        </header>
+
+        <div class="hero-content">
+            <h3>Lets travel the world with us</h3>
+            <h2>Explore the world<br>with <span class="outline-text">Stackly</span></h2>
+        </div>
+
+        <div class="search-container">
+            <div class="search-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Where to?">
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option value="" disabled selected>Destinations</option>
+                        <option value="maldives">Maldives</option>
+                        <option value="bali">Bali</option>
+                        <option value="hawaii">Hawaii</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option value="" disabled selected>Duration</option>
+                        <option value="3">3 Days</option>
+                        <option value="5">5 Days</option>
+                        <option value="7">1 Week</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Find Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. POPULAR DESTINATIONS -->
+    <section id="destinations">
+        <div class="section-header animate-on-scroll">
+            <h2>Popular Destinations</h2>
+            <p>Explore the most breathtaking places around the globe handpicked just for you.</p>
+        </div>
+        <div class="dest-grid">
+            <div class="dest-card animate-on-scroll">
+                <img src="assets/cinque-terre.webp" alt="Cinque Terre">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>Cinque Terre</h3>
+                        <p>Italy &bull; Coastal Beauty</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.1s;">
+                <img src="assets/mount-fuji.webp" alt="Mount Fuji">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>Mount Fuji</h3>
+                        <p>Japan &bull; Sacred Summit</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="London">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>London</h3>
+                        <p>United Kingdom &bull; Historic City</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Santorini">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>Santorini</h3>
+                        <p>Greece &bull; Island Escape</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Paris">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>Paris</h3>
+                        <p>France &bull; City of Love</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.5s;">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Swiss Alps">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>Swiss Alps</h3>
+                        <p>Switzerland &bull; Alpine Wonder</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.6s;">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bali">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>Bali</h3>
+                        <p>Indonesia &bull; Tropical Paradise</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="dest-card animate-on-scroll" style="transition-delay: 0.7s;">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New York">
+                <div class="dest-overlay">
+                    <div class="dest-info">
+                        <h3>New York</h3>
+                        <p>USA &bull; Concrete Jungle</p>
+                    </div>
+                    <button class="btn-explore">Explore <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. FEATURED TRAVEL PACKAGES -->
+    <section id="packages">
+        <div class="section-header animate-on-scroll">
+            <h2>Featured Travel Packages</h2>
+            <p>Curated experiences combining the best destinations, stays, and activities.</p>
+        </div>
+        <div class="package-slider animate-on-scroll">
+            <div class="pkg-card">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bora Bora" class="pkg-img">
+                <div class="pkg-content">
+                    <div class="pkg-header">
+                        <h3 class="pkg-title">Bora Bora Escape</h3>
+                        <div class="pkg-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                    </div>
+                    <div class="pkg-details">
+                        <span><i class="fa-regular fa-clock"></i> 7 Days</span>
+                        <span><i class="fa-solid fa-location-dot"></i> French Polynesia</span>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">Experience the ultimate luxury in overwater bungalows with pristine turquoise waters.</p>
+                    <div class="pkg-footer">
+                        <div class="pkg-price">$3,450 <span>/person</span></div>
+                        <button class="btn-view">View Package</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pkg-card">
+                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Machu Picchu" class="pkg-img">
+                <div class="pkg-content">
+                    <div class="pkg-header">
+                        <h3 class="pkg-title">Inca Trail Adventure</h3>
+                        <div class="pkg-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+                    </div>
+                    <div class="pkg-details">
+                        <span><i class="fa-regular fa-clock"></i> 10 Days</span>
+                        <span><i class="fa-solid fa-location-dot"></i> Peru</span>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">Trek through the Andes to discover the ancient ruins of Machu Picchu.</p>
+                    <div class="pkg-footer">
+                        <div class="pkg-price">$2,100 <span>/person</span></div>
+                        <button class="btn-view">View Package</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pkg-card">
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Taj Mahal" class="pkg-img">
+                <div class="pkg-content">
+                    <div class="pkg-header">
+                        <h3 class="pkg-title">Golden Triangle</h3>
+                        <div class="pkg-rating"><i class="fa-solid fa-star"></i> 4.7</div>
+                    </div>
+                    <div class="pkg-details">
+                        <span><i class="fa-regular fa-clock"></i> 8 Days</span>
+                        <span><i class="fa-solid fa-location-dot"></i> India</span>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">Immerse yourself in rich culture, vibrant colors, and majestic architecture.</p>
+                    <div class="pkg-footer">
+                        <div class="pkg-price">$1,850 <span>/person</span></div>
+                        <button class="btn-view">View Package</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pkg-card">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dubai" class="pkg-img">
+                <div class="pkg-content">
+                    <div class="pkg-header">
+                        <h3 class="pkg-title">Dubai Luxury Tour</h3>
+                        <div class="pkg-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                    </div>
+                    <div class="pkg-details">
+                        <span><i class="fa-regular fa-clock"></i> 5 Days</span>
+                        <span><i class="fa-solid fa-location-dot"></i> UAE</span>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">Shop, dine, and explore the futuristic marvels of the desert oasis.</p>
+                    <div class="pkg-footer">
+                        <div class="pkg-price">$2,800 <span>/person</span></div>
+                        <button class="btn-view">View Package</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. EXPLORE BY TRAVEL STYLE -->
+    <section id="styles">
+        <div class="section-header animate-on-scroll">
+            <h2>Explore by Travel Style</h2>
+            <p>Find the perfect trip that matches your unique travel personality.</p>
+        </div>
+        <div class="style-grid">
+            <div class="style-card animate-on-scroll">
+                <div class="style-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Beach Holidays">
+                </div>
+                <h4>Beach Holidays</h4>
+            </div>
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.1s;">
+                <div class="style-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Adventure">
+                </div>
+                <h4>Adventure</h4>
+            </div>
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="style-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Honeymoon">
+                </div>
+                <h4>Honeymoon</h4>
+            </div>
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.3s;">
+                <div class="style-img-wrapper">
+                    <img src="assets/family-travel.webp" alt="Family Trips">
+                </div>
+                <h4>Family Trips</h4>
+            </div>
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.4s;">
+                <div class="style-img-wrapper">
+                    <img src="assets/cultural.webp" alt="Cultural Tours">
+                </div>
+                <h4>Cultural Tours</h4>
+            </div>
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.5s;">
+                <div class="style-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Luxury Travel">
+                </div>
+                <h4>Luxury Travel</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. TRENDING GETAWAYS -->
+    <section id="trending">
+        <div class="section-header animate-on-scroll">
+            <h2>Trending Getaways</h2>
+            <p>Discover the most sought-after destinations of the season.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-item bento-large animate-on-scroll">
+                <img src="assets/maldives.webp" alt="Maldives">
+                <div class="bento-content">
+                    <h3>The Maldives</h3>
+                    <p>Experience unmatched luxury in the Indian Ocean.</p>
+                    <button class="bento-btn">Discover Now</button>
+                </div>
+            </div>
+            <div class="bento-item animate-on-scroll" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="New York">
+                <div class="bento-content">
+                    <h3>New York City</h3>
+                    <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;">View Trips</button>
+                </div>
+            </div>
+            <div class="bento-item animate-on-scroll" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Venice">
+                <div class="bento-content">
+                    <h3>Venice, Italy</h3>
+                    <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;">View Trips</button>
+                </div>
+            </div>
+            <div class="bento-item animate-on-scroll" style="transition-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sydney">
+                <div class="bento-content">
+                    <h3>Sydney</h3>
+                    <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;">View Trips</button>
+                </div>
+            </div>
+            <div class="bento-item animate-on-scroll" style="transition-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Kyoto">
+                <div class="bento-content">
+                    <h3>Kyoto, Japan</h3>
+                    <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;">View Trips</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHY CHOOSE US -->
+    <section id="choose-us">
+        <div class="section-header fade-up">
+            <h2>Why Choose Us</h2>
+            <p>We are dedicated to providing you with the best travel experiences possible.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <h4>Expert Travel Planning</h4>
+                <p>Our experienced agents craft personalized itineraries tailored to your unique preferences and style.</p>
+            </div>
+            <div class="feature-card fade-up" style="animation-delay: 0.1s;">
+                <div class="feature-icon"><i class="fa-solid fa-tags"></i></div>
+                <h4>Best Price Guarantee</h4>
+                <p>We ensure you get the most value for your money with competitive pricing and exclusive deals.</p>
+            </div>
+            <div class="feature-card fade-up" style="animation-delay: 0.2s;">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>Secure & Trusted Booking</h4>
+                <p>Enjoy peace of mind with our secure payment gateways and trusted partner networks.</p>
+            </div>
+            <div class="feature-card fade-up" style="animation-delay: 0.3s;">
+                <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+                <h4>24/7 Travel Support</h4>
+                <p>Our dedicated support team is available around the clock to assist you during your journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. EXCLUSIVE TRAVEL OFFERS -->
+    <section id="offers">
+        <div class="section-header animate-on-scroll">
+            <h2>Exclusive Travel Offers</h2>
+            <p>Limited time deals on our most popular destinations.</p>
+        </div>
+        <div class="offers-grid">
+            <div class="offer-card animate-on-scroll">
+                <div class="discount-badge">20% OFF</div>
+                <h3>Bali Retreat</h3>
+                <p>7 Days / 6 Nights in a luxury villa with private pool, daily breakfast, and spa treatment.</p>
+                <div class="offer-price">$1,199 <del>$1,499</del></div>
+                <button class="btn-book">Book Now</button>
+            </div>
+            <div class="offer-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="discount-badge">SAVE $500</div>
+                <h3>Alaskan Cruise</h3>
+                <p>10 Days / 9 Nights glacier viewing, wildlife spotting, and gourmet dining onboard.</p>
+                <div class="offer-price">$2,499 <del>$2,999</del></div>
+                <button class="btn-book">Book Now</button>
+            </div>
+            <div class="offer-card animate-on-scroll" style="transition-delay: 0.4s;">
+                <div class="discount-badge">30% OFF</div>
+                <h3>Costa Rica Eco Tour</h3>
+                <p>5 Days / 4 Nights rainforest exploration, ziplining, and volcano hot springs.</p>
+                <div class="offer-price">$899 <del>$1,285</del></div>
+                <button class="btn-book">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. HOW YOUR JOURNEY WORKS -->
+    <section id="journey">
+        <div class="section-header animate-on-scroll">
+            <h2>How Your Journey Works</h2>
+            <p>Planning your dream vacation is easy with our simple 4-step process.</p>
+        </div>
+        <div class="steps-container">
+            <div class="step animate-on-scroll">
+                <div class="step-icon"><i class="fa-solid fa-globe"></i></div>
+                <span class="step-num">01</span>
+                <h4>Choose Destination</h4>
+                <p>Select from our wide range of curated destinations worldwide.</p>
+            </div>
+            <div class="step animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="step-icon"><i class="fa-solid fa-sliders"></i></div>
+                <span class="step-num">02</span>
+                <h4>Customize Your Trip</h4>
+                <p>Tailor your itinerary, accommodations, and activities to your liking.</p>
+            </div>
+            <div class="step animate-on-scroll" style="transition-delay: 0.4s;">
+                <div class="step-icon"><i class="fa-solid fa-check-circle"></i></div>
+                <span class="step-num">03</span>
+                <h4>Confirm Booking</h4>
+                <p>Secure your plans with our safe and easy payment process.</p>
+            </div>
+            <div class="step animate-on-scroll" style="transition-delay: 0.6s;">
+                <div class="step-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <span class="step-num">04</span>
+                <h4>Enjoy Your Journey</h4>
+                <p>Pack your bags and get ready for an unforgettable experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. TRAVEL INSPIRATION GALLERY -->
+    <section id="gallery">
+        <div class="section-header animate-on-scroll">
+            <h2>Travel Inspiration Gallery</h2>
+            <p>Glimpses of beautiful moments captured by our travelers.</p>
+        </div>
+        <div class="masonry-grid">
+            <div class="gallery-item animate-on-scroll"><img src="assets/lake-louise.webp" alt="Gallery"><div class="gallery-overlay"><h4>Lake Louise</h4><p>Canada</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Tropical Resort</h4><p>Fiji</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Bangkok</h4><p>Thailand</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Autumn Forest</h4><p>USA</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Eiffel Tower</h4><p>Paris</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="assets/mountain-cabin.webp" alt="Gallery"><div class="gallery-overlay"><h4>Mountain Cabin</h4><p>Norway</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="assets/new-gallery.webp" alt="Gallery"><div class="gallery-overlay"><h4>Ocean View</h4><p>Australia</p></div></div>
+        </div>
+    </section>
+
+    <!-- 9. TRAVELER TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="section-header animate-on-scroll">
+            <h2>Traveler Testimonials</h2>
+            <p>Read what our happy customers have to say about their trips.</p>
+        </div>
+        <div class="testimonial-slider animate-on-scroll">
+            <div class="testi-card">
+                <div class="testi-quote"><i class="fa-solid fa-quote-left"></i></div>
+                <p class="testi-text">"Our honeymoon in the Maldives was absolutely perfect. The team handled every detail flawlessly. Highly recommended!"</p>
+                <div class="testi-author">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Sarah">
+                    <div>
+                        <h4>Sarah Jenkins</h4>
+                        <p>Traveled to Maldives</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-quote"><i class="fa-solid fa-quote-left"></i></div>
+                <p class="testi-text">"The cultural tour through Japan exceeded all expectations. Our guide was incredibly knowledgeable and the hotels were fantastic."</p>
+                <div class="testi-author">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="David">
+                    <div>
+                        <h4>David Chen</h4>
+                        <p>Traveled to Japan</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-quote"><i class="fa-solid fa-quote-left"></i></div>
+                <p class="testi-text">"Booking our family vacation to Costa Rica was completely stress-free. The kids loved the activities and everything ran on time."</p>
+                <div class="testi-author">
+                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Emily">
+                    <div>
+                        <h4>Emily Roberts</h4>
+                        <p>Traveled to Costa Rica</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. TRAVEL STATISTICS -->
+    <section id="stats">
+        <div class="stats-container">
+            <div class="stat-item animate-on-scroll">
+                <span class="stat-number" data-target="120">0</span>
+                <span class="stat-label">Destinations</span>
+            </div>
+            <div class="stat-item animate-on-scroll" style="transition-delay: 0.1s;">
+                <span class="stat-number" data-target="15000">0</span>
+                <span class="stat-label">Happy Travelers</span>
+            </div>
+            <div class="stat-item animate-on-scroll" style="transition-delay: 0.2s;">
+                <span class="stat-number" data-target="98">0</span>
+                <span class="stat-label">Positive Reviews %</span>
+            </div>
+            <div class="stat-item animate-on-scroll" style="transition-delay: 0.3s;">
+                <span class="stat-number" data-target="10">0</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. TRAVEL JOURNAL -->
+    <section id="journal">
+        <div class="section-header animate-on-scroll">
+            <h2>Travel Journal</h2>
+            <p>Tips, guides, and stories to inspire your next adventure.</p>
+        </div>
+        <div class="journal-grid">
+            <div class="blog-card animate-on-scroll">
+                <div class="blog-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Blog">
+                    <span class="blog-category">Guide</span>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> Oct 12, 2023</span>
+                    <h3 class="blog-title">The Ultimate Packing List for Europe</h3>
+                    <p class="blog-desc">Everything you need to know about packing light while staying stylish during your European getaway.</p>
+                    <a href="#" class="btn-read">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card animate-on-scroll" style="transition-delay: 0.1s;">
+                <div class="blog-img-wrapper">
+                    <img src="assets/budget-travel.webp" alt="Blog">
+                    <span class="blog-category">Tips</span>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> Sep 28, 2023</span>
+                    <h3 class="blog-title">How to Travel on a Budget</h3>
+                    <p class="blog-desc">Discover our top secrets for saving money on flights, accommodations, and activities without sacrificing fun.</p>
+                    <a href="#" class="btn-read">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="blog-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Blog">
+                    <span class="blog-category">Inspiration</span>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> Aug 15, 2023</span>
+                    <h3 class="blog-title">10 Hidden Gems in Southeast Asia</h3>
+                    <p class="blog-desc">Escape the crowds and explore these breathtaking lesser-known spots across Vietnam, Thailand, and Indonesia.</p>
+                    <a href="#" class="btn-read">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. FINAL TRAVEL CTA -->
+    <section id="cta">
+        <div class="cta-content animate-on-scroll">
+            <h2>Where Will You Go Next?</h2>
+            <p>Your dream destination awaits. Let our experts craft the perfect itinerary for your next unforgettable journey.</p>
+            <button class="btn-cta">Start Planning</button>
+        </div>
+    </section>
+
+    <!-- ANIMATION & LOGIC SCRIPT -->
+        <!-- FOOTER -->
+    <footer style="background: #1a1f24; color: #fff; padding: 80px 8% 30px; font-family: 'Poppins', sans-serif;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px;">
+            <div>
+                <a href="index.html" style="color: #fff; text-decoration: none; display: flex; flex-direction: column; margin-bottom: 20px;">
+                    <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 1px; margin:0; line-height:1;">STACKLY</h2>
+                </a>
+                <p style="font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 20px;">We create unforgettable travel experiences tailored to your dreams. Explore the world with premium luxury and comfort.</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0; margin:0;">
+                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About Us</a></li>
+                    <li style="margin-bottom: 15px;"><a href="services.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Our Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Travel Blog</a></li>
+                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact Us</a></li>
+                    <li style="margin-bottom: 15px;"><a href="login.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Login / Register</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Top Destinations</h4>
+                <ul style="list-style: none; padding: 0; margin:0;">
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Maldives Islands</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Paris, France</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Swiss Alps</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Dubai, UAE</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#aaa'">Bali, Indonesia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Newsletter</h4>
+                <p style="font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 20px;">Subscribe to our newsletter for exclusive offers and travel inspiration.</p>
+                <form style="display: flex; gap: 10px; flex-wrap: wrap;" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Email Address" required style="flex: 1; padding: 12px 15px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; background: rgba(255,255,255,0.05); color: #fff; font-family: 'Poppins', sans-serif; outline: none; min-width: 150px;">
+                    <button type="submit" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <div style="margin-top: 25px;">
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +1 (800) 123-4567</p>
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 0;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> hello@stackly.com</p>
+                </div>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2024 Stackly Agency. All Rights Reserved.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
+                <a href="#" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+<script>
+        // Scroll Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Counter Animation Trigger
+                    if (entry.target.classList.contains('stat-item') && !entry.target.dataset.counted) {
+                        entry.target.dataset.counted = "true";
+                        const counter = entry.target.querySelector('.stat-number');
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += step;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target + (target > 100 ? '+' : (target === 98 ? '%' : '+'));
+                            }
+                        };
+                        updateCounter();
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll, .fade-up').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+

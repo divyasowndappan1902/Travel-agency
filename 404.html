@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found - Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25a4ad;
+            --primary-dark: #1c8c94;
+            --text-main: #1a1a1a;
+            --text-muted: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --shadow-sm: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-md: 0 15px 35px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-main); overflow-x: hidden; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+
+        /* Navbar */
+        
+        header {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000 !important;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 8% !important;
+            transition: all 0.3s ease;
+ display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px; }
+        .logo h1 { font-size: 32px; font-weight: 700; letter-spacing: 1px; line-height: 1; font-family: 'Poppins', sans-serif; }
+        .logo p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-family: 'Poppins', sans-serif;}
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul li a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; transition: var(--transition); font-family: 'Poppins', sans-serif;}
+        nav ul li a:hover { color: var(--primary); }
+
+        section { padding: 100px 8%; position: relative; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 42px; color: var(--text-main); margin-bottom: 15px; font-weight: 700; }
+        .section-header p { color: var(--text-muted); font-size: 16px; max-width: 650px; margin: 0 auto; font-family: 'Poppins', sans-serif; line-height: 1.6; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* 1. CONTACT HERO */
+        #contact-hero {
+            height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            color: white; padding-top: 100px;
+        }
+        .hero-content h1 { font-size: 56px; font-weight: 700; margin-bottom: 20px; text-transform: capitalize; }
+        .hero-content p { font-size: 18px; max-width: 700px; margin: 0 auto 30px; font-family: 'Poppins', sans-serif; font-weight: 300; opacity: 0.9; line-height: 1.6; }
+        .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Poppins', sans-serif; font-size: 14px; opacity: 0.8; }
+        .breadcrumb a { color: white; text-decoration: none; transition: var(--transition); }
+        .breadcrumb a:hover { color: var(--primary); }
+
+        /* 2. CONTACT INFORMATION */
+        #contact-info { background: var(--bg-white); margin-top: -80px; padding-top: 0; z-index: 10; position: relative; padding-bottom: 80px; }
+        .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .info-card { background: white; border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid #eee; }
+        .info-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-icon { width: 70px; height: 70px; margin: 0 auto 20px; background: rgba(37, 164, 173, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--primary); transition: var(--transition); }
+        .info-card:hover .info-icon { background: var(--primary); color: white; transform: scale(1.1); }
+        .info-card h4 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .info-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        /* 3. PLAN YOUR TRIP / CONTACT FORM */
+        #contact-form { background: var(--bg-light); }
+        .form-container { display: flex; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); background: white; max-width: 1200px; margin: 0 auto; }
+        .form-img { flex: 1; position: relative; min-height: 600px; }
+        .form-img img { width: 100%; height: 100%; object-fit: cover; }
+        .form-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2)); display: flex; flex-direction: column; justify-content: flex-end; padding: 50px; color: white; }
+        .form-img-overlay h3 { font-size: 32px; margin-bottom: 15px; }
+        .form-img-overlay p { font-family: 'Poppins', sans-serif; font-size: 15px; opacity: 0.9; line-height: 1.6; }
+        .form-content { flex: 1; padding: 60px; }
+        .form-content h2 { font-size: 32px; margin-bottom: 10px; }
+        .form-content > p { color: var(--text-muted); margin-bottom: 30px; font-size: 14px; }
+        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { position: relative; }
+        .form-group.full { grid-column: span 2; }
+        .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 15px 20px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--text-main); transition: var(--transition); outline: none; background: #fafafa; }
+        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(37,164,173,0.1); }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { grid-column: span 2; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 16px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-submit:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 164, 173, 0.3); }
+
+        /* Form Feedback */
+        .form-feedback { display: none; padding: 15px; border-radius: 10px; font-size: 14px; margin-top: 20px; text-align: center; font-weight: 500; grid-column: span 2; }
+        .form-feedback.success { display: block; background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .form-feedback.error { display: block; background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+
+        /* 4. FIND US (MAP) */
+        #find-us { background: var(--bg-white); }
+        .map-container { display: flex; align-items: center; gap: 50px; background: white; border-radius: 20px; padding: 40px; box-shadow: var(--shadow-sm); border: 1px solid #eee; }
+        .map-content { flex: 1; }
+        .map-content h3 { font-size: 32px; margin-bottom: 20px; }
+        .map-content p { color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; font-size: 15px; }
+        .address-box { background: var(--bg-light); padding: 25px; border-radius: 15px; border-left: 4px solid var(--primary); margin-bottom: 30px; }
+        .address-box h4 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+        .address-box p { font-size: 14px; color: var(--text-muted); margin: 0; }
+        .btn-directions { display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; background: transparent; color: var(--text-main); border: 2px solid #ddd; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 14px; transition: var(--transition); }
+        .btn-directions:hover { border-color: var(--primary); color: var(--primary); }
+        .map-iframe { flex: 1.5; height: 400px; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .map-iframe iframe { width: 100%; height: 100%; border: 0; }
+
+        /* 5. TRAVEL ASSISTANCE */
+        #assistance {
+            text-align: center; padding: 100px 8%; color: white;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+        .assist-header h2 { font-size: 42px; margin-bottom: 15px; color: white; }
+        .assist-header p { font-size: 16px; opacity: 0.9; margin-bottom: 50px; font-family: 'Poppins', sans-serif; }
+        .assist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .assist-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 40px 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); transition: var(--transition); }
+        .assist-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.2); border-color: white; }
+        .assist-icon { font-size: 40px; color: var(--primary); margin-bottom: 20px; }
+        .assist-card h4 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 15px; color: white; }
+
+        /* 6. FAQ SECTION */
+        #faq { background: var(--bg-light); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .accordion { border-bottom: 1px solid #ddd; }
+        .acc-btn { width: 100%; padding: 25px 0; display: flex; justify-content: space-between; align-items: center; background: none; border: none; text-align: left; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: var(--transition); }
+        .acc-btn:hover { color: var(--primary); }
+        .acc-icon { font-size: 16px; color: var(--primary); transition: transform 0.3s ease; }
+        .accordion.active .acc-icon { transform: rotate(180deg); }
+        .acc-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .acc-content p { padding-bottom: 25px; color: var(--text-muted); line-height: 1.6; font-size: 15px; }
+
+        /* 7. FINAL CTA */
+        #final-cta { text-align: center; padding: 120px 8%; background: linear-gradient(rgba(37, 164, 173, 0.85), rgba(28, 140, 148, 0.95)), url('https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed; color: white; }
+        .cta-wrapper h2 { font-size: 48px; margin-bottom: 20px; }
+        .cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
+        .btn-solid { padding: 15px 35px; background: white; color: var(--primary-dark); border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); font-family: 'Poppins', sans-serif; }
+        .btn-solid:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn-trans { padding: 15px 35px; background: transparent; color: white; border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); border: 2px solid white; font-family: 'Poppins', sans-serif; }
+        .btn-trans:hover { background: white; color: var(--primary-dark); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .info-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-container, .map-container { flex-direction: column; }
+            .form-img { min-height: 400px; }
+            .assist-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 60px 5%; }
+            #contact-info { margin-top: -40px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .contact-form { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+            .btn-submit { grid-column: span 1; }
+            .hero-content h1 { font-size: 40px; }
+            .cta-wrapper h2 { font-size: 36px; }
+            .cta-btns { flex-direction: column; }
+            .map-iframe { height: 300px; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- No Header in 404 -->
+
+    <style>
+        @keyframes float3D {
+            0% { transform: translateY(0) rotateX(10deg) rotateY(15deg); text-shadow: 1px 1px 0px #187178, 2px 2px 0px #187178, 3px 3px 0px #187178, 4px 4px 0px #187178, 5px 5px 0px #187178, 6px 6px 0px #187178, 0 15px 20px rgba(0,0,0,0.2); }
+            50% { transform: translateY(-20px) rotateX(-10deg) rotateY(-15deg) scale(1.05); text-shadow: 1px 1px 0px #187178, 2px 2px 0px #187178, 3px 3px 0px #187178, 4px 4px 0px #187178, 5px 5px 0px #187178, 6px 6px 0px #187178, -5px 35px 25px rgba(0,0,0,0.1); }
+            100% { transform: translateY(0) rotateX(10deg) rotateY(15deg); text-shadow: 1px 1px 0px #187178, 2px 2px 0px #187178, 3px 3px 0px #187178, 4px 4px 0px #187178, 5px 5px 0px #187178, 6px 6px 0px #187178, 0 15px 20px rgba(0,0,0,0.2); }
+        }
+        .text-3d {
+            font-size: 140px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block;
+            animation: float3D 6s ease-in-out infinite;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+    </style>
+    <!-- 1. CONTACT HERO -->
+    <section id="error-404" style="height: 100vh; min-height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column; background: var(--bg-light);">
+        <div class="error-content reveal active">
+            <h1 class="text-3d">404</h1>
+            
+            <style>
+                @keyframes spinLost {
+                    0% { transform: rotate(0deg); }
+                    15% { transform: rotate(140deg); }
+                    35% { transform: rotate(50deg); }
+                    55% { transform: rotate(230deg); }
+                    80% { transform: rotate(170deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                .spinning-needle {
+                    animation: spinLost 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                    transform-origin: 50px 50px;
+                }
+                .compass-svg {
+                    width: 100px; height: 100px;
+                    margin: 0 auto 20px;
+                    display: block;
+                    filter: drop-shadow(0 10px 15px rgba(37,164,173,0.15));
+                }
+            </style>
+            
+            <svg class="compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" stroke="var(--primary)" stroke-width="4" fill="#fff"/>
+                <circle cx="50" cy="50" r="35" stroke="#ddd" stroke-width="1.5" fill="none" stroke-dasharray="4 4"/>
+                
+                <text x="50" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--primary)" font-family="sans-serif">N</text>
+                <text x="50" y="87" text-anchor="middle" font-size="10" font-weight="bold" fill="#aaa" font-family="sans-serif">S</text>
+                <text x="17" y="53" text-anchor="middle" font-size="10" font-weight="bold" fill="#aaa" font-family="sans-serif">W</text>
+                <text x="83" y="53" text-anchor="middle" font-size="10" font-weight="bold" fill="#aaa" font-family="sans-serif">E</text>
+
+                <g class="spinning-needle">
+                    <polygon points="46,50 50,22 54,50" fill="var(--primary)"/>
+                    <polygon points="46,50 50,78 54,50" fill="#e74c3c"/>
+                    <circle cx="50" cy="50" r="4" fill="#1a1f24"/>
+                </g>
+            </svg>
+
+            <h2 style="font-size: 36px; color: var(--text-main); margin-bottom: 20px;">You Look Lost!</h2>
+            <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 30px; font-family: 'Poppins', sans-serif;">Oops! The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 10px;">
+                <a href="javascript:history.back()" style="padding: 15px 35px; background: transparent; color: var(--primary); border: 2px solid var(--primary); border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); display: inline-block;">Go Back</a>
+                <a href="index.html" style="padding: 15px 35px; background: var(--primary); color: white; border-radius: 30px; font-weight: 600; text-decoration: none; transition: var(--transition); display: inline-block; border: 2px solid var(--primary);">Go to Homepage</a>
+            </div>
+        </div>
+    </section>
+<!-- No Footer in 404 -->
+
+</body>
+</html>
+

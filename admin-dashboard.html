@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,26 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Custom Validation Styles */
+        .settings-form.was-validated input:invalid, 
+        .settings-form.was-validated select:invalid, 
+        .settings-form.was-validated textarea:invalid {
+            border-color: #e74c3c !important;
+            background-color: #fffaf9 !important;
+        }
+        .invalid-feedback {
+            display: none;
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: left;
+        }
+        .settings-form.was-validated input:invalid ~ .invalid-feedback,
+        .settings-form.was-validated select:invalid ~ .invalid-feedback,
+        .settings-form.was-validated textarea:invalid ~ .invalid-feedback {
+            display: block;
+        }
 
         /* Sidebar */
         .sidebar { width: 260px; background: var(--sidebar-bg); color: #fff; display: flex; flex-direction: column; transition: 0.3s; }
@@ -117,13 +137,13 @@
             </div>
         </div>
         <div class="sidebar-menu">
-            <a href="#" class="menu-item active"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-            <a href="#" class="menu-item"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
-            <a href="#" class="menu-item"><i class="fa-solid fa-users"></i> Customers</a>
-            <a href="#" class="menu-item"><i class="fa-solid fa-map-location-dot"></i> Packages</a>
-            <a href="#" class="menu-item"><i class="fa-solid fa-wallet"></i> Payments</a>
-            <a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
-            <a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="404.html" class="menu-item active"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            <a href="404.html" class="menu-item"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+            <a href="404.html" class="menu-item"><i class="fa-solid fa-users"></i> Customers</a>
+            <a href="404.html" class="menu-item"><i class="fa-solid fa-map-location-dot"></i> Packages</a>
+            <a href="404.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Payments</a>
+            <a href="404.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            <a href="404.html" class="menu-item"><i class="fa-solid fa-gear"></i> Settings</a>
         </div>
         <div class="sidebar-footer">
             <a href="login.html" class="menu-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
@@ -153,7 +173,7 @@
         <div class="dashboard-body">
             <div class="page-header">
                 <h2>Dashboard Overview</h2>
-                <button class="btn-add"><i class="fa-solid fa-plus"></i> Add New Package</button>
+                <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i> Add New Package</button>
             </div>
 
             <!-- Stats -->
@@ -193,7 +213,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Recent Bookings</span>
-                        <a href="#" class="view-all">View All</a>
+                        <a href="404.html" class="view-all">View All</a>
                     </div>
                     <div class="table-responsive">
                         <table>
@@ -264,7 +284,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Top Packages</span>
-                        <a href="#" class="view-all">View All</a>
+                        <a href="404.html" class="view-all">View All</a>
                     </div>
                     <div class="package-list">
                         <div class="package-item">
@@ -325,7 +345,7 @@
             'Bookings': `
                 <div class="page-header">
                     <h2>Manage Bookings</h2>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i> New Booking</button>
+                    <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i> New Booking</button>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -365,7 +385,7 @@
             'Customers': `
                 <div class="page-header">
                     <h2>Customer Directory</h2>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                    <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i> Add Customer</button>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -405,7 +425,7 @@
             'Packages': `
                 <div class="page-header">
                     <h2>Tour Packages</h2>
-                    <button class="btn-add"><i class="fa-solid fa-plus"></i> Create Package</button>
+                    <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i> Create Package</button>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -445,7 +465,7 @@
             'Payments': `
                 <div class="page-header">
                     <h2>Payment Transactions</h2>
-                    <button class="btn-add"><i class="fa-solid fa-file-invoice"></i> Generate Invoice</button>
+                    <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-file-invoice"></i> Generate Invoice</button>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -485,7 +505,7 @@
             'Analytics': `
                 <div class="page-header">
                     <h2>Analytics & Reports</h2>
-                    <button class="btn-add"><i class="fa-solid fa-download"></i> Download Report</button>
+                    <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-download"></i> Download Report</button>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -528,18 +548,18 @@
             'Settings': `
                 <div class="page-header">
                     <h2>Platform Settings</h2>
-                    <button class="btn-add"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                    <button class="btn-add" onclick="window.location.href='404.html'"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
                 </div>
                 <div class="dashboard-layout">
                     <div class="card">
                         <div class="card-header"><span class="card-title">General Settings</span></div>
-                        <form style="display: flex; flex-direction: column; gap: 15px;">
-                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Platform Name</label><input type="text" value="Stackly" style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"></div>
-                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Support Email</label><input type="email" value="support@stackly.com" style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"></div>
-                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Currency</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>USD ($)</option><option>EUR (€)</option></select></div>
-                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Timezone</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>UTC (GMT+0)</option><option>EST (GMT-5)</option></select></div>
-                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Date Format</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>MM/DD/YYYY</option><option>DD/MM/YYYY</option></select></div>
-                            <div><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Language</label><select style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>English</option><option>Spanish</option></select></div>
+                        <form class="settings-form" novalidate onsubmit="event.preventDefault(); if(!this.checkValidity()){ this.classList.add('was-validated'); return; } window.location.href='404.html';" style="display: flex; flex-direction: column; gap: 15px;">
+                            <div style="position: relative;"><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Platform Name</label><input type="text" value="Stackly" required style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><div class="invalid-feedback">Platform Name is required.</div></div>
+                            <div style="position: relative;"><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Support Email</label><input type="email" value="support@stackly.com" required style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><div class="invalid-feedback">Valid Support Email is required.</div></div>
+                            <div style="position: relative;"><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Currency</label><select required style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>USD ($)</option><option>EUR (€)</option></select><div class="invalid-feedback">Required.</div></div>
+                            <div style="position: relative;"><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Timezone</label><select required style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>UTC (GMT+0)</option><option>EST (GMT-5)</option></select><div class="invalid-feedback">Required.</div></div>
+                            <div style="position: relative;"><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Date Format</label><select required style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>MM/DD/YYYY</option><option>DD/MM/YYYY</option></select><div class="invalid-feedback">Required.</div></div>
+                            <div style="position: relative;"><label style="font-size: 13px; color: var(--text-muted); margin-bottom: 5px; display: block;">Language</label><select required style="width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;"><option>English</option><option>Spanish</option></select><div class="invalid-feedback">Required.</div></div>
                             <button type="submit" class="btn-add" style="margin-top: 10px; align-self: flex-start;">Save Settings</button>
                         </form>
                     </div>

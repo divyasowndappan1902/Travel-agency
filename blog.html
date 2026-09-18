@@ -59,7 +59,7 @@
         #blog-hero {
             height: 60vh; min-height: 500px;
             display: flex; align-items: center; justify-content: center; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed;
             color: white; padding-top: 100px;
         }
         .hero-content h1 { font-size: 64px; font-weight: 700; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -107,11 +107,12 @@
         .story-desc { color: var(--text-muted); font-size: 14px; line-height: 1.6; font-family: 'Poppins', sans-serif; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         /* 4. DESTINATION INSPIRATION */
-        #inspiration { background: var(--text-main); color: white; overflow: hidden; }
+        #inspiration { background: var(--text-main); color: white; overflow: hidden; padding-right: 0 !important; }
+        #inspiration .section-header { padding-right: 8%; }
         #inspiration .section-header h2 { color: white; }
-        .insp-slider { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .insp-slider { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; padding-right: 8%; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .insp-slider::-webkit-scrollbar { display: none; }
-        .insp-card { flex: 0 0 400px; height: 500px; position: relative; border-radius: 20px; overflow: hidden; scroll-snap-align: center; cursor: pointer; }
+        .insp-card { flex: 0 0 400px; max-width: 85vw; height: 500px; position: relative; border-radius: 20px; overflow: hidden; scroll-snap-align: center; cursor: pointer; }
         .insp-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
         .insp-card:hover img { transform: scale(1.08); }
         .insp-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; }
@@ -182,7 +183,7 @@
         /* 8. NEWSLETTER CTA */
         #newsletter {
             text-align: center; padding: 120px 8%;
-            background: linear-gradient(rgba(37, 164, 173, 0.8), rgba(28, 140, 148, 0.9)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            background: linear-gradient(rgba(37, 164, 173, 0.8), rgba(28, 140, 148, 0.9)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed;
             color: white;
         }
         .nl-wrapper { max-width: 600px; margin: 0 auto; }
@@ -215,7 +216,177 @@
             .nl-form input { background: rgba(255,255,255,0.2); border-radius: 30px; border: 1px solid rgba(255,255,255,0.3); }
             nav ul { display: none; }
         }
-    </style>
+    
+        /* STRICT MOBILE RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 1920px) {
+            /* General ultra-wide constraints if needed */
+        }
+        @media (max-width: 1440px) {
+            .hero-content h1 { font-size: 60px; }
+        }
+        @media (max-width: 1080px) {
+            .info-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .contact-form { grid-template-columns: 1fr !important; }
+            .form-group.full { grid-column: span 1 !important; }
+            .btn-submit { grid-column: span 1 !important; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .bento-large { grid-column: span 2 !important; }
+        }
+        @media (max-width: 1024px) {
+            nav ul { gap: 15px; }
+            nav ul li a { font-size: 13px; }
+            .auth-btn a { padding: 8px 16px; font-size: 12px; }
+            .team-grid, .srv-grid, .blog-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+             
+            body.dashboard-body-class, body.auth-body-class { height: auto !important; overflow-y: auto !important; display: block !important; } 
+            .hero-content h1 { font-size: 48px !important; }
+            .form-container, .auth-wrapper { flex-direction: column !important; height: auto !important; }
+            .form-img, .auth-banner { min-height: 250px !important; flex: none !important; width: 100% !important; }
+            .form-content, .auth-form-container { padding: 30px !important; width: 100% !important; }
+            .info-grid { grid-template-columns: 1fr !important; }
+            .stats-container { flex-direction: column !important; }
+            .hero-content { padding-top: 120px !important; }
+            .section-header h2 { font-size: 32px !important; }
+            .team-grid, .blog-grid, .srv-grid { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+            
+            /* Dashboard specific */
+            .dashboard-layout, .dashboard-grid { grid-template-columns: 1fr !important; display: flex !important; flex-direction: column !important; }
+            .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+            header { left: 0 !important; position: fixed !important; padding: 15px !important; }
+            .main-content { margin-left: 0 !important; padding-top: 20px !important; display: block !important;}
+        }
+        @media (max-width: 414px) {
+            .hero-content h1 { font-size: 36px !important; }
+            .section-header h2 { font-size: 28px !important; }
+            header { padding: 15px 5% !important; }
+            section { padding: 50px 5% !important; }
+            .auth-form-inner { width: 100% !important; max-width: 100% !important; }
+            .text-3d { font-size: 80px !important; }
+        }
+        @media (max-width: 390px) {
+            .hero-content h1 { font-size: 32px !important; }
+            .logo h1 { font-size: 24px !important; }
+            .btn-submit { padding: 12px !important; font-size: 14px !important; }
+        }
+        @media (max-width: 375px) {
+            .hero-content p { font-size: 14px !important; }
+            .section-header p { font-size: 14px !important; }
+            .card-title { font-size: 16px !important; }
+            .text-3d { font-size: 60px !important; }
+        }
+
+    
+        /* HAMBURGER MENU CSS */
+        .hamburger { display: none; font-size: 24px; color: white; cursor: pointer; margin-left: 15px; z-index: 1001; }
+        @media (max-width: 768px) {
+            .hamburger { display: block !important; }
+            nav ul {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 85px); /* Full screen minus header */
+                background: rgba(26, 31, 36, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 0;
+                transition: left 0.4s ease-out;
+                align-items: center;
+                justify-content: center;
+                gap: 40px !important;
+                z-index: 999;
+            }
+            nav ul li a {
+                font-size: 24px !important;
+                font-weight: 600;
+            }
+            nav ul.show {
+                left: 0;
+            }
+            .auth-btn { margin-left: auto; }
+        }
+
+    
+        @media (max-width: 320px) {
+            .hero-content h1 { font-size: 28px !important; }
+            .hero-content p { font-size: 13px !important; }
+            .section-header h2 { font-size: 24px !important; }
+            .section-header p { font-size: 13px !important; }
+            .logo h1 { font-size: 20px !important; }
+            .pkg-title { font-size: 18px !important; }
+            .pkg-price { font-size: 18px !important; }
+            .bento-content h3 { font-size: 18px !important; }
+            .btn-cta, .btn-submit, .btn-book, .btn-view, .bento-btn { padding: 10px 15px !important; font-size: 13px !important; }
+            section { padding: 40px 5% !important; }
+            .text-3d { font-size: 45px !important; }
+            .features-grid, .offers-grid, .steps-container, .style-grid, .package-slider { gap: 20px !important; }
+            
+            /* Dashboard */
+            .sidebar { padding: 15px !important; }
+            .dashboard-card { padding: 15px !important; }
+            
+            /* Login/Auth */
+            .auth-form-container { padding: 20px !important; }
+            .form-box { padding: 20px !important; }
+            .input-group input, .input-group textarea { padding: 10px 10px 10px 40px !important; font-size: 13px !important; }
+            .input-group i { bottom: 12px !important; left: 15px !important; font-size: 14px !important; }
+            
+            /* Typography */
+            h1, h2, h3, h4, h5, h6 { word-break: break-word; }
+        }
+
+        /* GLOBAL MOBILE RESPONSIVE FIXES FOR STACKING (Applies up to 1024px) */
+        @media (max-width: 1024px) {
+            /* How Your Journey Works */
+            .steps-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .steps-container::before { display: none !important; }
+            .step { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 15px !important; }
+            
+            /* Our Travel Promise */
+            .promise-container { flex-direction: column !important; }
+            .promise-content { padding: 30px !important; width: 100% !important; box-sizing: border-box !important; }
+            .promise-img { width: 100% !important; min-height: 250px !important; }
+            .promise-items { grid-template-columns: 1fr !important; }
+            
+            /* Travel Statistics */
+            .stats-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .stat-item { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+            
+            /* Customer Dashboard Trip Cards */
+            .trip-card { flex-direction: column !important; }
+            .trip-img { width: 100% !important; height: 250px !important; }
+            .trip-details { padding: 20px !important; width: 100% !important; box-sizing: border-box !important; }
+            .trip-info-grid { grid-template-columns: 1fr !important; }
+            
+            /* Layout fixes */
+            .dashboard-grid { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+        }
+
+        
+        
+        /* GLOBAL 3D BUTTONS */
+        button, .btn-cta, .btn-submit, .btn-book, .btn-view, .btn-search, .btn-social, .btn-outline, .auth-btn a, .btn-white, .btn-transparent {
+            box-shadow: 0 8px 0px rgba(0, 0, 0, 0.3) !important;
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            margin-bottom: 8px !important;
+            position: relative;
+            transform: translateY(0) !important;
+        }
+        button:hover, .btn-cta:hover, .btn-submit:hover, .btn-book:hover, .btn-view:hover, .btn-search:hover, .btn-social:hover, .btn-outline:hover, .auth-btn a:hover, .btn-white:hover, .btn-transparent:hover {
+            transform: translateY(4px) !important;
+            box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3) !important;
+        }
+        button:active, .btn-cta:active, .btn-submit:active, .btn-book:active, .btn-view:active, .btn-search:active, .btn-social:active, .btn-outline:active, .auth-btn a:active, .btn-white:active, .btn-transparent:active {
+            transform: translateY(8px) !important;
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3) !important;
+        }
+</style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -235,9 +406,13 @@
         </nav>
     
             <div class="auth-btn" style="margin-left: auto;">
-                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);">Login</a>
+                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             </div>
-        </header>
+        
+        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('show'); document.body.style.overflow = document.querySelector('nav ul').classList.contains('show') ? 'hidden' : '';">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
 
     <!-- 1. BLOG HERO -->
     <section id="blog-hero">
@@ -251,14 +426,14 @@
     <section id="featured">
         <div class="featured-container reveal">
             <div class="featured-img">
-                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Paris Featured">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Paris Featured">
             </div>
             <div class="featured-content">
                 <span class="cat-badge">Featured Destination</span>
                 <h2>The Magic of Paris in the Autumn: A Curated Guide</h2>
                 <p>Experience the City of Light as the leaves turn golden. From hidden bistros in Le Marais to tranquil walks along the Seine, discover why autumn is the perfect time for a Parisian getaway.</p>
                 <div class="meta">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Author">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Author">
                     <span>By <strong>Elena Rodriguez</strong> &bull; Oct 15, 2023</span>
                 </div>
                 <a href="404.html" class="btn-read">Read Story</a>
@@ -277,7 +452,7 @@
             <div class="story-card reveal delay-1">
                 <div class="story-img-wrap">
                     <span class="cat-badge">Destinations</span>
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dubai">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Dubai">
                 </div>
                 <div class="story-info">
                     <span class="story-date">Nov 02, 2023</span>
@@ -303,7 +478,7 @@
             <div class="story-card reveal delay-3">
                 <div class="story-img-wrap">
                     <span class="cat-badge">Travel Tips</span>
-                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bora Bora">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Bora Bora">
                 </div>
                 <div class="story-info">
                     <span class="story-date">Oct 20, 2023</span>
@@ -316,7 +491,7 @@
             <div class="story-card reveal delay-1">
                 <div class="story-img-wrap">
                     <span class="cat-badge">Luxury</span>
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Luxury Resort">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Luxury Resort">
                 </div>
                 <div class="story-info">
                     <span class="story-date">Oct 12, 2023</span>
@@ -329,7 +504,7 @@
             <div class="story-card reveal delay-2">
                 <div class="story-img-wrap">
                     <span class="cat-badge">Honeymoon</span>
-                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Honeymoon">
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Honeymoon">
                 </div>
                 <div class="story-info">
                     <span class="story-date">Oct 05, 2023</span>
@@ -355,7 +530,7 @@
             <div class="story-card reveal delay-1">
                 <div class="story-img-wrap">
                     <span class="cat-badge">Adventure</span>
-                    <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Adventure">
+                    <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Adventure">
                 </div>
                 <div class="story-info">
                     <span class="story-date">Sep 22, 2023</span>
@@ -368,7 +543,7 @@
             <div class="story-card reveal delay-2">
                 <div class="story-img-wrap">
                     <span class="cat-badge">Food & Culture</span>
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Food">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Food">
                 </div>
                 <div class="story-info">
                     <span class="story-date">Sep 15, 2023</span>
@@ -388,42 +563,30 @@
         </div>
         <div class="insp-slider reveal delay-1">
             <div class="insp-card">
-                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bali">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Bali">
                 <div class="insp-overlay">
                     <h3>Bali, Indonesia</h3>
                     <p>Temples, terraces, and tranquil beaches.</p>
                 </div>
             </div>
             <div class="insp-card">
-                <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldives">
+                <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Maldives">
                 <div class="insp-overlay">
                     <h3>The Maldives</h3>
                     <p>Crystal clear waters and overwater luxury.</p>
                 </div>
             </div>
             <div class="insp-card">
-                <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Switzerland">
-                <div class="insp-overlay">
-                    <h3>Switzerland</h3>
-                    <p>Alpine majesty and picturesque villages.</p>
-                </div>
-            </div>
+                <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Switzerland">
             <div class="insp-card">
-                <img src="https://images.unsplash.com/photo-1526495124232-a04e1849168c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai">
-                <div class="insp-overlay">
-                    <h3>Dubai, UAE</h3>
-                    <p>Futuristic skylines meeting vast deserts.</p>
-                </div>
-            </div>
-            <div class="insp-card">
-                <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Japan">
+                <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Japan">
                 <div class="insp-overlay">
                     <h3>Kyoto, Japan</h3>
                     <p>Ancient temples and stunning cherry blossoms.</p>
                 </div>
             </div>
             <div class="insp-card">
-                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paris">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Paris">
                 <div class="insp-overlay">
                     <h3>Paris, France</h3>
                     <p>The city of art, fashion, and romance.</p>
@@ -447,21 +610,21 @@
                 </div>
             </div>
             <div class="tip-card reveal delay-2">
-                <div class="tip-img"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Budget"></div>
+                <div class="tip-img"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Budget"></div>
                 <div class="tip-content">
                     <h4>Budget Planning</h4>
                     <p>How to track expenses and find the best conversion rates abroad.</p>
                 </div>
             </div>
             <div class="tip-card reveal delay-3">
-                <div class="tip-img"><img src="https://images.unsplash.com/photo-1503437313881-503a91226402?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Safety"></div>
+                <div class="tip-img"><img src="https://images.unsplash.com/photo-1503437313881-503a91226402?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Safety"></div>
                 <div class="tip-content">
                     <h4>Travel Safety</h4>
                     <p>Essential precautions to keep your belongings and yourself secure.</p>
                 </div>
             </div>
             <div class="tip-card reveal delay-4">
-                <div class="tip-img"><img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Time"></div>
+                <div class="tip-img"><img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Time"></div>
                 <div class="tip-content">
                     <h4>Best Time to Travel</h4>
                     <p>Navigating shoulder seasons to avoid crowds and save money.</p>
@@ -478,23 +641,23 @@
         </div>
         <div class="masonry reveal delay-1">
             <div class="photo-item large-photo">
-                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Roadtrip">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Roadtrip">
                 <div class="photo-overlay"><h4>The Open Road</h4></div>
             </div>
             <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ocean">
+                <img src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Ocean">
                 <div class="photo-overlay"><h4>Deep Blue</h4></div>
             </div>
             <div class="photo-item tall-photo">
-                <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mountain">
+                <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Mountain">
                 <div class="photo-overlay"><h4>Summit Views</h4></div>
             </div>
             <div class="photo-item wide-photo">
-                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Canyon">
+                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Canyon">
                 <div class="photo-overlay"><h4>Grandeur</h4></div>
             </div>
             <div class="photo-item">
-                <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="City">
+                <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="City">
                 <div class="photo-overlay"><h4>Urban Lights</h4></div>
             </div>
         </div>
@@ -546,11 +709,11 @@
             <div>
                 <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Quick Links</h4>
                 <ul style="list-style: none; padding: 0; margin:0;">
-                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About Us</a></li>
-                    <li style="margin-bottom: 15px;"><a href="services.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Our Services</a></li>
-                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Travel Blog</a></li>
-                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact Us</a></li>
-                    <li style="margin-bottom: 15px;"><a href="login.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Login / Register</a></li>
+                    <li style="margin-bottom: 15px;"><a href="home.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Home</a></li>
+                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About</a></li>
+                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Blog</a></li>
+                    <li style="margin-bottom: 15px;"><a href="service.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Service</a></li>
+                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact</a></li>
                 </ul>
             </div>
             <div>
@@ -571,13 +734,13 @@
                     <button type="submit" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
                 <div style="margin-top: 25px;">
-                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +1 (800) 123-4567</p>
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> (980) 123-4567</p>
                     <p style="font-size: 14px; color: #aaa; margin-bottom: 0;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> hello@stackly.com</p>
                 </div>
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2024 Stackly Agency. All Rights Reserved.</p>
+            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2026 Stackly Agency. All Rights Reserved.</p>
             <div style="display: flex; gap: 20px;">
                 <a href="404.html" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
                 <a href="404.html" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
@@ -598,6 +761,15 @@
             observer.observe(el);
         });
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
 </body>
 </html>
+
+
 

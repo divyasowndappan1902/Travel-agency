@@ -328,6 +328,7 @@ section {
 .package-slider::-webkit-scrollbar { display: none; }
 .pkg-card {
     flex: 0 0 350px;
+    max-width: 85vw;
     background: var(--bg-white);
     border-radius: 15px;
     overflow: hidden;
@@ -378,11 +379,6 @@ section {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
-    animation: imageMove 8s ease-in-out infinite alternate;
-}
-@keyframes imageMove {
-    0% { transform: scale(1.1) translateX(-3%); }
-    100% { transform: scale(1.1) translateX(3%); }
 }
 .style-card:hover .style-img-wrapper {
     transform: translateY(-10px);
@@ -390,7 +386,6 @@ section {
     border-color: var(--primary);
 }
 .style-card:hover .style-img-wrapper img {
-    animation-play-state: paused;
     transform: scale(1.25);
 }
 .style-card h4 { color: var(--text-main); font-weight: 600; font-size: 16px; }
@@ -595,7 +590,7 @@ section {
 
 /* 9. Testimonials */
 #testimonials {
-    background: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+    background: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed;
     position: relative;
 }
 #testimonials::before { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.7); }
@@ -666,7 +661,7 @@ section {
 #cta {
     position: relative;
     padding: 120px 8%;
-    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed;
     text-align: center;
     color: white;
 }
@@ -724,16 +719,269 @@ section {
             100% { opacity: 0; }
         }
 
-    </style>
+    
+        /* STRICT MOBILE RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 1920px) {
+            /* General ultra-wide constraints if needed */
+        }
+        @media (max-width: 1440px) {
+            .hero-content h1 { font-size: 60px; }
+        }
+        @media (max-width: 1080px) {
+            .info-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .contact-form { grid-template-columns: 1fr !important; }
+            .form-group.full { grid-column: span 1 !important; }
+            .btn-submit { grid-column: span 1 !important; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .bento-large { grid-column: span 2 !important; }
+        }
+        @media (max-width: 1024px) {
+            nav ul { gap: 15px; }
+            nav ul li a { font-size: 13px; }
+            .auth-btn a { padding: 8px 16px; font-size: 12px; }
+            .team-grid, .srv-grid, .blog-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+             
+            body.dashboard-body-class, body.auth-body-class { height: auto !important; overflow-y: auto !important; display: block !important; } 
+            .hero-content h1 { font-size: 48px !important; }
+            .form-container, .auth-wrapper { flex-direction: column !important; height: auto !important; }
+            .form-img, .auth-banner { min-height: 250px !important; flex: none !important; width: 100% !important; }
+            .form-content, .auth-form-container { padding: 30px !important; width: 100% !important; }
+            .info-grid { grid-template-columns: 1fr !important; }
+            .stats-container { flex-direction: column !important; }
+            .hero-content { padding-top: 120px !important; }
+            .section-header h2 { font-size: 32px !important; }
+            .team-grid, .blog-grid, .srv-grid { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+            
+            /* Dashboard specific */
+            .dashboard-layout, .dashboard-grid { grid-template-columns: 1fr !important; display: flex !important; flex-direction: column !important; }
+            .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+            header { left: 0 !important; position: fixed !important; padding: 15px !important; }
+            .main-content { margin-left: 0 !important; padding-top: 20px !important; display: block !important;}
+        }
+        @media (max-width: 414px) {
+            .hero-content h1 { font-size: 36px !important; }
+            .section-header h2 { font-size: 28px !important; }
+            header { padding: 15px 5% !important; }
+            section { padding: 50px 5% !important; }
+            .auth-form-inner { width: 100% !important; max-width: 100% !important; }
+            .text-3d { font-size: 80px !important; }
+        }
+        @media (max-width: 390px) {
+            .hero-content h1 { font-size: 32px !important; }
+            .logo h1 { font-size: 24px !important; }
+            .btn-submit { padding: 12px !important; font-size: 14px !important; }
+        }
+        @media (max-width: 375px) {
+            .hero-content p { font-size: 14px !important; }
+            .section-header p { font-size: 14px !important; }
+            .card-title { font-size: 16px !important; }
+            .text-3d { font-size: 60px !important; }
+        }
+        @media (max-width: 320px) {
+            .hero-content h1 { font-size: 28px !important; }
+            .hero-content p { font-size: 13px !important; }
+            .section-header h2 { font-size: 24px !important; }
+            .section-header p { font-size: 13px !important; }
+            .logo h1 { font-size: 20px !important; }
+            .pkg-title { font-size: 18px !important; }
+            .pkg-price { font-size: 18px !important; }
+            .bento-content h3 { font-size: 18px !important; }
+            .btn-cta, .btn-submit, .btn-book, .btn-view { padding: 10px 15px !important; font-size: 13px !important; }
+            section { padding: 40px 5% !important; }
+            .text-3d { font-size: 45px !important; }
+            .features-grid, .offers-grid, .steps-container { gap: 20px !important; }
+        }
+
+    
+        /* HAMBURGER MENU CSS */
+        .hamburger { display: none; font-size: 24px; color: white; cursor: pointer; margin-left: 15px; z-index: 1001; }
+        @media (max-width: 768px) {
+            .hamburger { display: block !important; }
+            nav ul {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 85px); /* Full screen minus header */
+                background: rgba(26, 31, 36, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 0;
+                transition: left 0.4s ease-out;
+                align-items: center;
+                justify-content: center;
+                gap: 40px !important;
+                z-index: 999;
+            }
+            nav ul li a {
+                font-size: 24px !important;
+                font-weight: 600;
+            }
+            nav ul.show {
+                left: 0;
+            }
+            .auth-btn { margin-left: auto; }
+        }
+
+    
+        /* GLOBAL MOBILE RESPONSIVE FIXES FOR STACKING (Applies up to 1024px) */
+        @media (max-width: 1024px) {
+            /* How Your Journey Works */
+            .steps-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .steps-container::before { display: none !important; }
+            .step { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 15px !important; }
+            
+            /* Our Travel Promise */
+            .promise-container { flex-direction: column !important; }
+            .promise-content { padding: 30px !important; width: 100% !important; box-sizing: border-box !important; }
+            .promise-img { width: 100% !important; min-height: 250px !important; }
+            .promise-items { grid-template-columns: 1fr !important; }
+            
+            /* Travel Statistics */
+            .stats-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .stat-item { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+            
+            /* Customer Dashboard Trip Cards */
+            .pricing-grid { grid-template-columns: 1fr !important; }
+            
+            /* Dashboard specific */
+            .dashboard-layout, .dashboard-grid { grid-template-columns: 1fr !important; display: flex !important; flex-direction: column !important; }
+            .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+            header { left: 0 !important; position: fixed !important; padding: 15px !important; }
+            .main-content { margin-left: 0 !important; padding-top: 20px !important; display: block !important;}
+        }
+        @media (max-width: 414px) {
+            .hero-content h1 { font-size: 36px !important; }
+            .section-header h2 { font-size: 28px !important; }
+            header { padding: 15px 5% !important; }
+            section { padding: 50px 5% !important; }
+            .auth-form-inner { width: 100% !important; max-width: 100% !important; }
+            .text-3d { font-size: 80px !important; }
+        }
+        @media (max-width: 390px) {
+            .hero-content h1 { font-size: 32px !important; }
+            .logo h1 { font-size: 24px !important; }
+            .btn-submit { padding: 12px !important; font-size: 14px !important; }
+        }
+        @media (max-width: 375px) {
+            .hero-content p { font-size: 14px !important; }
+            .section-header p { font-size: 14px !important; }
+            .card-title { font-size: 16px !important; }
+            .text-3d { font-size: 60px !important; }
+        }
+        @media (max-width: 320px) {
+            .hero-content h1 { font-size: 28px !important; }
+            .hero-content p { font-size: 13px !important; }
+            .section-header h2 { font-size: 24px !important; }
+            .section-header p { font-size: 13px !important; }
+            .logo h1 { font-size: 20px !important; }
+            .pkg-title { font-size: 18px !important; }
+            .pkg-price { font-size: 18px !important; }
+            .bento-content h3 { font-size: 18px !important; }
+            .btn-cta, .btn-submit, .btn-book, .btn-view { padding: 10px 15px !important; font-size: 13px !important; }
+            section { padding: 40px 5% !important; }
+            .text-3d { font-size: 45px !important; }
+            .features-grid, .offers-grid, .steps-container { gap: 20px !important; }
+        }
+
+    
+        /* HAMBURGER MENU CSS */
+        .hamburger { display: none; font-size: 24px; color: white; cursor: pointer; margin-left: 15px; z-index: 1001; }
+        @media (max-width: 768px) {
+            .hamburger { display: block !important; }
+            nav ul {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 85px); /* Full screen minus header */
+                background: rgba(26, 31, 36, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 0;
+                transition: left 0.4s ease-out;
+                align-items: center;
+                justify-content: center;
+                gap: 40px !important;
+                z-index: 999;
+            }
+            nav ul li a {
+                font-size: 24px !important;
+                font-weight: 600;
+            }
+            nav ul.show {
+                left: 0;
+            }
+            .auth-btn { margin-left: auto; }
+        }
+
+    
+        /* GLOBAL MOBILE RESPONSIVE FIXES FOR STACKING (Applies up to 1024px) */
+        @media (max-width: 1024px) {
+            /* How Your Journey Works */
+            .steps-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .steps-container::before { display: none !important; }
+            .step { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 15px !important; }
+            
+            /* Our Travel Promise */
+            .promise-container { flex-direction: column !important; }
+            .promise-content { padding: 30px !important; width: 100% !important; box-sizing: border-box !important; }
+            .promise-img { width: 100% !important; min-height: 250px !important; }
+            .promise-items { grid-template-columns: 1fr !important; }
+            
+            /* Travel Statistics */
+            .stats-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .stat-item { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+            
+            /* Customer Dashboard Trip Cards */
+            .trip-card { flex-direction: column !important; }
+            .trip-img { width: 100% !important; height: 250px !important; }
+            .trip-details { padding: 20px !important; width: 100% !important; box-sizing: border-box !important; }
+            .trip-info-grid { grid-template-columns: 1fr !important; }
+            
+            /* Layout fixes */
+            .dashboard-grid { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+            
+            /* Package Slider */
+            .package-slider { flex-direction: column !important; align-items: center !important; overflow-x: visible !important; }
+            .pkg-card { flex: 0 0 auto !important; width: 100% !important; max-width: 400px !important; }
+        }
+
+        
+        
+        /* GLOBAL 3D BUTTONS */
+        button, .btn-cta, .btn-submit, .btn-book, .btn-view, .btn-search, .btn-social, .btn-outline, .auth-btn a, .btn-white, .btn-transparent {
+            box-shadow: 0 8px 0px rgba(0, 0, 0, 0.3) !important;
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            margin-bottom: 8px !important;
+            position: relative;
+            transform: translateY(0) !important;
+        }
+        button:hover, .btn-cta:hover, .btn-submit:hover, .btn-book:hover, .btn-view:hover, .btn-search:hover, .btn-social:hover, .btn-outline:hover, .auth-btn a:hover, .btn-white:hover, .btn-transparent:hover {
+            transform: translateY(4px) !important;
+            box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3) !important;
+        }
+        button:active, .btn-cta:active, .btn-submit:active, .btn-book:active, .btn-view:active, .btn-search:active, .btn-social:active, .btn-outline:active, .auth-btn a:active, .btn-white:active, .btn-transparent:active {
+            transform: translateY(8px) !important;
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3) !important;
+        }
+</style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
     <div class="hero-section">
         <div class="hero-slider">
-            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60');"></div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60');"></div>
         </div>
         <header>
             <a href="404.html" class="logo">
@@ -750,40 +998,19 @@ section {
             </nav>
         
             <div class="auth-btn" style="margin-left: auto;">
-                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);">Login</a>
+                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             </div>
-        </header>
+        
+        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('show'); document.body.style.overflow = document.querySelector('nav ul').classList.contains('show') ? 'hidden' : '';">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
 
         <div class="hero-content">
             <h3>Lets travel the world with us</h3>
             <h2>Explore the world<br>with <span class="outline-text">Stackly</span></h2>
-        </div>
-
-        <div class="search-container">
-            <div class="search-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Where to?">
-                </div>
-                <div class="form-group">
-                    <select>
-                        <option value="" disabled selected>Destinations</option>
-                        <option value="maldives">Maldives</option>
-                        <option value="bali">Bali</option>
-                        <option value="hawaii">Hawaii</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="form-group">
-                    <select>
-                        <option value="" disabled selected>Duration</option>
-                        <option value="3">3 Days</option>
-                        <option value="5">5 Days</option>
-                        <option value="7">1 Week</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <button class="btn-search" onclick="window.location.href='404.html'"><i class="fa-solid fa-magnifying-glass"></i> Find Now</button>
-            </div>
+            <button class="btn-cta" style="margin-top: 30px;" onclick="window.location.href='404.html'"><i class="fa-solid fa-magnifying-glass"></i> Find Now</button>
         </div>
     </div>
 
@@ -815,7 +1042,7 @@ section {
                 </div>
             </div>
             <div class="dest-card animate-on-scroll" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="London">
+                <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="London">
                 <div class="dest-overlay">
                     <div class="dest-info">
                         <h3>London</h3>
@@ -825,7 +1052,7 @@ section {
                 </div>
             </div>
             <div class="dest-card animate-on-scroll" style="transition-delay: 0.3s;">
-                <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Santorini">
+                <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Santorini">
                 <div class="dest-overlay">
                     <div class="dest-info">
                         <h3>Santorini</h3>
@@ -835,7 +1062,7 @@ section {
                 </div>
             </div>
             <div class="dest-card animate-on-scroll" style="transition-delay: 0.4s;">
-                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Paris">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Paris">
                 <div class="dest-overlay">
                     <div class="dest-info">
                         <h3>Paris</h3>
@@ -845,7 +1072,7 @@ section {
                 </div>
             </div>
             <div class="dest-card animate-on-scroll" style="transition-delay: 0.5s;">
-                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Swiss Alps">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Swiss Alps">
                 <div class="dest-overlay">
                     <div class="dest-info">
                         <h3>Swiss Alps</h3>
@@ -855,7 +1082,7 @@ section {
                 </div>
             </div>
             <div class="dest-card animate-on-scroll" style="transition-delay: 0.6s;">
-                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bali">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Bali">
                 <div class="dest-overlay">
                     <div class="dest-info">
                         <h3>Bali</h3>
@@ -865,7 +1092,7 @@ section {
                 </div>
             </div>
             <div class="dest-card animate-on-scroll" style="transition-delay: 0.7s;">
-                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New York">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="New York">
                 <div class="dest-overlay">
                     <div class="dest-info">
                         <h3>New York</h3>
@@ -885,7 +1112,7 @@ section {
         </div>
         <div class="package-slider animate-on-scroll">
             <div class="pkg-card">
-                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bora Bora" class="pkg-img">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Bora Bora" class="pkg-img">
                 <div class="pkg-content">
                     <div class="pkg-header">
                         <h3 class="pkg-title">Bora Bora Escape</h3>
@@ -903,7 +1130,7 @@ section {
                 </div>
             </div>
             <div class="pkg-card">
-                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Machu Picchu" class="pkg-img">
+                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Machu Picchu" class="pkg-img">
                 <div class="pkg-content">
                     <div class="pkg-header">
                         <h3 class="pkg-title">Inca Trail Adventure</h3>
@@ -921,7 +1148,7 @@ section {
                 </div>
             </div>
             <div class="pkg-card">
-                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Taj Mahal" class="pkg-img">
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Taj Mahal" class="pkg-img">
                 <div class="pkg-content">
                     <div class="pkg-header">
                         <h3 class="pkg-title">Golden Triangle</h3>
@@ -939,7 +1166,7 @@ section {
                 </div>
             </div>
             <div class="pkg-card">
-                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dubai" class="pkg-img">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Dubai" class="pkg-img" style="object-position: center 25%;">
                 <div class="pkg-content">
                     <div class="pkg-header">
                         <h3 class="pkg-title">Dubai Luxury Tour</h3>
@@ -965,40 +1192,40 @@ section {
             <h2>Explore by Travel Style</h2>
             <p>Find the perfect trip that matches your unique travel personality.</p>
         </div>
-        <div class="style-grid">
-            <div class="style-card animate-on-scroll zoom-in">
+                <div class="style-grid">
+            <div class="style-card animate-on-scroll">
                 <div class="style-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Beach Holidays">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Beach Holidays">
                 </div>
                 <h4>Beach Holidays</h4>
             </div>
-            <div class="style-card animate-on-scroll zoom-in" style="transition-delay: 0.1s;">
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.1s;">
                 <div class="style-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Adventure">
+                    <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Adventure">
                 </div>
                 <h4>Adventure</h4>
             </div>
-            <div class="style-card animate-on-scroll zoom-in" style="transition-delay: 0.2s;">
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.2s;">
                 <div class="style-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Honeymoon">
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Honeymoon">
                 </div>
                 <h4>Honeymoon</h4>
             </div>
-            <div class="style-card animate-on-scroll zoom-in" style="transition-delay: 0.3s;">
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.3s;">
                 <div class="style-img-wrapper">
                     <img src="assets/family-travel.webp" alt="Family Trips">
                 </div>
                 <h4>Family Trips</h4>
             </div>
-            <div class="style-card animate-on-scroll zoom-in" style="transition-delay: 0.4s;">
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.4s;">
                 <div class="style-img-wrapper">
                     <img src="assets/cultural.webp" alt="Cultural Tours">
                 </div>
                 <h4>Cultural Tours</h4>
             </div>
-            <div class="style-card animate-on-scroll zoom-in" style="transition-delay: 0.5s;">
+            <div class="style-card animate-on-scroll" style="transition-delay: 0.5s;">
                 <div class="style-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Luxury Travel">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Luxury Travel">
                 </div>
                 <h4>Luxury Travel</h4>
             </div>
@@ -1021,28 +1248,28 @@ section {
                 </div>
             </div>
             <div class="bento-item animate-on-scroll" style="transition-delay: 0.1s;">
-                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="New York">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="New York">
                 <div class="bento-content">
                     <h3>New York City</h3>
                     <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;" onclick="window.location.href='404.html'">View Trips</button>
                 </div>
             </div>
             <div class="bento-item animate-on-scroll" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Venice">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Venice">
                 <div class="bento-content">
                     <h3>Venice, Italy</h3>
                     <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;" onclick="window.location.href='404.html'">View Trips</button>
                 </div>
             </div>
             <div class="bento-item animate-on-scroll" style="transition-delay: 0.3s;">
-                <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sydney">
+                <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Sydney">
                 <div class="bento-content">
                     <h3>Sydney</h3>
                     <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;" onclick="window.location.href='404.html'">View Trips</button>
                 </div>
             </div>
             <div class="bento-item animate-on-scroll" style="transition-delay: 0.4s;">
-                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Kyoto">
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Kyoto">
                 <div class="bento-content">
                     <h3>Kyoto, Japan</h3>
                     <button class="bento-btn" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;" onclick="window.location.href='404.html'">View Trips</button>
@@ -1162,10 +1389,10 @@ section {
         </div>
         <div class="masonry-grid">
             <div class="gallery-item animate-on-scroll"><img src="assets/lake-louise.webp" alt="Gallery"><div class="gallery-overlay"><h4>Lake Louise</h4><p>Canada</p></div></div>
-            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Tropical Resort</h4><p>Fiji</p></div></div>
-            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Bangkok</h4><p>Thailand</p></div></div>
-            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Autumn Forest</h4><p>USA</p></div></div>
-            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gallery"><div class="gallery-overlay"><h4>Eiffel Tower</h4><p>Paris</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Gallery"><div class="gallery-overlay"><h4>Tropical Resort</h4><p>Fiji</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Gallery"><div class="gallery-overlay"><h4>Bangkok</h4><p>Thailand</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Gallery"><div class="gallery-overlay"><h4>Autumn Forest</h4><p>USA</p></div></div>
+            <div class="gallery-item animate-on-scroll"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Gallery"><div class="gallery-overlay"><h4>Eiffel Tower</h4><p>Paris</p></div></div>
             <div class="gallery-item animate-on-scroll"><img src="assets/mountain-cabin.webp" alt="Gallery"><div class="gallery-overlay"><h4>Mountain Cabin</h4><p>Norway</p></div></div>
             <div class="gallery-item animate-on-scroll"><img src="assets/new-gallery.webp" alt="Gallery"><div class="gallery-overlay"><h4>Ocean View</h4><p>Australia</p></div></div>
         </div>
@@ -1182,7 +1409,7 @@ section {
                 <div class="testi-quote"><i class="fa-solid fa-quote-left"></i></div>
                 <p class="testi-text">"Our honeymoon in the Maldives was absolutely perfect. The team handled every detail flawlessly. Highly recommended!"</p>
                 <div class="testi-author">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Sarah">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Sarah">
                     <div>
                         <h4>Sarah Jenkins</h4>
                         <p>Traveled to Maldives</p>
@@ -1194,7 +1421,7 @@ section {
                 <div class="testi-quote"><i class="fa-solid fa-quote-left"></i></div>
                 <p class="testi-text">"The cultural tour through Japan exceeded all expectations. Our guide was incredibly knowledgeable and the hotels were fantastic."</p>
                 <div class="testi-author">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="David">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="David">
                     <div>
                         <h4>David Chen</h4>
                         <p>Traveled to Japan</p>
@@ -1206,7 +1433,7 @@ section {
                 <div class="testi-quote"><i class="fa-solid fa-quote-left"></i></div>
                 <p class="testi-text">"Booking our family vacation to Costa Rica was completely stress-free. The kids loved the activities and everything ran on time."</p>
                 <div class="testi-author">
-                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Emily">
+                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Emily">
                     <div>
                         <h4>Emily Roberts</h4>
                         <p>Traveled to Costa Rica</p>
@@ -1248,7 +1475,7 @@ section {
         <div class="journal-grid">
             <div class="blog-card animate-on-scroll">
                 <div class="blog-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Blog">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Blog">
                     <span class="blog-category">Guide</span>
                 </div>
                 <div class="blog-content">
@@ -1272,7 +1499,7 @@ section {
             </div>
             <div class="blog-card animate-on-scroll" style="transition-delay: 0.2s;">
                 <div class="blog-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Blog">
+                    <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Blog">
                     <span class="blog-category">Inspiration</span>
                 </div>
                 <div class="blog-content">
@@ -1313,11 +1540,11 @@ section {
             <div>
                 <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Quick Links</h4>
                 <ul style="list-style: none; padding: 0; margin:0;">
-                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About Us</a></li>
-                    <li style="margin-bottom: 15px;"><a href="services.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Our Services</a></li>
-                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Travel Blog</a></li>
-                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact Us</a></li>
-                    <li style="margin-bottom: 15px;"><a href="login.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Login / Register</a></li>
+                    <li style="margin-bottom: 15px;"><a href="home.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Home</a></li>
+                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About</a></li>
+                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Blog</a></li>
+                    <li style="margin-bottom: 15px;"><a href="service.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Service</a></li>
+                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact</a></li>
                 </ul>
             </div>
             <div>
@@ -1338,13 +1565,13 @@ section {
                     <button type="submit" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
                 <div style="margin-top: 25px;">
-                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +1 (800) 123-4567</p>
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> (980) 123-4567</p>
                     <p style="font-size: 14px; color: #aaa; margin-bottom: 0;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> hello@stackly.com</p>
                 </div>
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2024 Stackly Agency. All Rights Reserved.</p>
+            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2026 Stackly Agency. All Rights Reserved.</p>
             <div style="display: flex; gap: 20px;">
                 <a href="404.html" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
                 <a href="404.html" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
@@ -1387,6 +1614,15 @@ section {
             observer.observe(el);
         });
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
 </body>
 </html>
+
+
 

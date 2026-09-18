@@ -75,7 +75,7 @@
             justify-content: center;
             text-align: center;
             padding: 0 20px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed;
             color: white;
             margin-top: 0;
         }
@@ -96,7 +96,7 @@
         .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .mv-card { background: var(--bg-white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); display: flex; flex-direction: column; }
         .mv-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
-        .mv-img { height: 250px; overflow: hidden; }
+        .mv-img { height: 350px; overflow: hidden; }
         .mv-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .mv-card:hover .mv-img img { transform: scale(1.1); }
         .mv-content { padding: 40px; text-align: center; }
@@ -190,7 +190,7 @@
         .team-card p { font-size: 14px; color: var(--text-muted); }
 
         /* 8. TRAVEL BY NUMBERS */
-        #numbers { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed; color: white; }
+        #numbers { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed; color: white; }
         .num-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
         .num-item i { font-size: 40px; margin-bottom: 20px; color: var(--primary); }
         .num-val { font-size: 50px; font-weight: 800; margin-bottom: 10px; }
@@ -227,10 +227,10 @@
         .promise-items { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .promise-item { display: flex; align-items: center; gap: 10px; font-weight: 500; }
         .promise-item i { color: var(--primary); font-size: 20px; }
-        .promise-img { flex: 1; background: url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover; min-height: 400px; }
+        .promise-img { flex: 1; background: url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover; min-height: 400px; }
 
         /* 12. FINAL CTA */
-        #final-cta { text-align: center; background: linear-gradient(rgba(0,0,0,0.5), rgba(37, 164, 173, 0.8)), url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed; color: white; padding: 120px 8%; }
+        #final-cta { text-align: center; background: linear-gradient(rgba(0,0,0,0.5), rgba(37, 164, 173, 0.8)), url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed; color: white; padding: 120px 8%; }
         .cta-wrapper { max-width: 800px; margin: 0 auto; }
         .cta-wrapper h2 { font-size: 48px; font-weight: 800; margin-bottom: 20px; }
         .cta-wrapper p { font-size: 18px; margin-bottom: 40px; opacity: 0.9; }
@@ -260,7 +260,177 @@
             .cta-wrapper h2 { font-size: 36px; }
             nav ul { display: none; } /* Simplified for demo */
         }
-    </style>
+    
+        /* STRICT MOBILE RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 1920px) {
+            /* General ultra-wide constraints if needed */
+        }
+        @media (max-width: 1440px) {
+            .hero-content h1 { font-size: 60px; }
+        }
+        @media (max-width: 1080px) {
+            .info-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .contact-form { grid-template-columns: 1fr !important; }
+            .form-group.full { grid-column: span 1 !important; }
+            .btn-submit { grid-column: span 1 !important; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .bento-large { grid-column: span 2 !important; }
+        }
+        @media (max-width: 1024px) {
+            nav ul { gap: 15px; }
+            nav ul li a { font-size: 13px; }
+            .auth-btn a { padding: 8px 16px; font-size: 12px; }
+            .team-grid, .srv-grid, .blog-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+             
+            body.dashboard-body-class, body.auth-body-class { height: auto !important; overflow-y: auto !important; display: block !important; } 
+            .hero-content h1 { font-size: 48px !important; }
+            .form-container, .auth-wrapper { flex-direction: column !important; height: auto !important; }
+            .form-img, .auth-banner { min-height: 250px !important; flex: none !important; width: 100% !important; }
+            .form-content, .auth-form-container { padding: 30px !important; width: 100% !important; }
+            .info-grid { grid-template-columns: 1fr !important; }
+            .stats-container { flex-direction: column !important; }
+            .hero-content { padding-top: 120px !important; }
+            .section-header h2 { font-size: 32px !important; }
+            .team-grid, .blog-grid, .srv-grid { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+            
+            /* Dashboard specific */
+            .dashboard-layout, .dashboard-grid { grid-template-columns: 1fr !important; display: flex !important; flex-direction: column !important; }
+            .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+            header { left: 0 !important; position: fixed !important; padding: 15px !important; }
+            .main-content { margin-left: 0 !important; padding-top: 20px !important; display: block !important;}
+        }
+        @media (max-width: 414px) {
+            .hero-content h1 { font-size: 36px !important; }
+            .section-header h2 { font-size: 28px !important; }
+            header { padding: 15px 5% !important; }
+            section { padding: 50px 5% !important; }
+            .auth-form-inner { width: 100% !important; max-width: 100% !important; }
+            .text-3d { font-size: 80px !important; }
+        }
+        @media (max-width: 390px) {
+            .hero-content h1 { font-size: 32px !important; }
+            .logo h1 { font-size: 24px !important; }
+            .btn-submit { padding: 12px !important; font-size: 14px !important; }
+        }
+        @media (max-width: 375px) {
+            .hero-content p { font-size: 14px !important; }
+            .section-header p { font-size: 14px !important; }
+            .card-title { font-size: 16px !important; }
+            .text-3d { font-size: 60px !important; }
+        }
+
+    
+        /* HAMBURGER MENU CSS */
+        .hamburger { display: none; font-size: 24px; color: white; cursor: pointer; margin-left: 15px; z-index: 1001; }
+        @media (max-width: 768px) {
+            .hamburger { display: block !important; }
+            nav ul {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 85px); /* Full screen minus header */
+                background: rgba(26, 31, 36, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 0;
+                transition: left 0.4s ease-out;
+                align-items: center;
+                justify-content: center;
+                gap: 40px !important;
+                z-index: 999;
+            }
+            nav ul li a {
+                font-size: 24px !important;
+                font-weight: 600;
+            }
+            nav ul.show {
+                left: 0;
+            }
+            .auth-btn { margin-left: auto; }
+        }
+
+    
+        @media (max-width: 320px) {
+            .hero-content h1 { font-size: 28px !important; }
+            .hero-content p { font-size: 13px !important; }
+            .section-header h2 { font-size: 24px !important; }
+            .section-header p { font-size: 13px !important; }
+            .logo h1 { font-size: 20px !important; }
+            .pkg-title { font-size: 18px !important; }
+            .pkg-price { font-size: 18px !important; }
+            .bento-content h3 { font-size: 18px !important; }
+            .btn-cta, .btn-submit, .btn-book, .btn-view, .bento-btn { padding: 10px 15px !important; font-size: 13px !important; }
+            section { padding: 40px 5% !important; }
+            .text-3d { font-size: 45px !important; }
+            .features-grid, .offers-grid, .steps-container, .style-grid, .package-slider { gap: 20px !important; }
+            
+            /* Dashboard */
+            .sidebar { padding: 15px !important; }
+            .dashboard-card { padding: 15px !important; }
+            
+            /* Login/Auth */
+            .auth-form-container { padding: 20px !important; }
+            .form-box { padding: 20px !important; }
+            .input-group input, .input-group textarea { padding: 10px 10px 10px 40px !important; font-size: 13px !important; }
+            .input-group i { bottom: 12px !important; left: 15px !important; font-size: 14px !important; }
+            
+            /* Typography */
+            h1, h2, h3, h4, h5, h6 { word-break: break-word; }
+        }
+
+        /* GLOBAL MOBILE RESPONSIVE FIXES FOR STACKING (Applies up to 1024px) */
+        @media (max-width: 1024px) {
+            /* How Your Journey Works */
+            .steps-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .steps-container::before { display: none !important; }
+            .step { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 15px !important; }
+            
+            /* Our Travel Promise */
+            .promise-container { flex-direction: column !important; }
+            .promise-content { padding: 30px !important; width: 100% !important; box-sizing: border-box !important; }
+            .promise-img { width: 100% !important; min-height: 250px !important; }
+            .promise-items { grid-template-columns: 1fr !important; }
+            
+            /* Travel Statistics */
+            .stats-container { flex-direction: column !important; align-items: center !important; gap: 40px !important; }
+            .stat-item { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+            
+            /* Customer Dashboard Trip Cards */
+            .trip-card { flex-direction: column !important; }
+            .trip-img { width: 100% !important; height: 250px !important; }
+            .trip-details { padding: 20px !important; width: 100% !important; box-sizing: border-box !important; }
+            .trip-info-grid { grid-template-columns: 1fr !important; }
+            
+            /* Layout fixes */
+            .dashboard-grid { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+        }
+
+        
+        
+        /* GLOBAL 3D BUTTONS */
+        button, .btn-cta, .btn-submit, .btn-book, .btn-view, .btn-search, .btn-social, .btn-outline, .auth-btn a, .btn-white, .btn-transparent {
+            box-shadow: 0 8px 0px rgba(0, 0, 0, 0.3) !important;
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            margin-bottom: 8px !important;
+            position: relative;
+            transform: translateY(0) !important;
+        }
+        button:hover, .btn-cta:hover, .btn-submit:hover, .btn-book:hover, .btn-view:hover, .btn-search:hover, .btn-social:hover, .btn-outline:hover, .auth-btn a:hover, .btn-white:hover, .btn-transparent:hover {
+            transform: translateY(4px) !important;
+            box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3) !important;
+        }
+        button:active, .btn-cta:active, .btn-submit:active, .btn-book:active, .btn-view:active, .btn-search:active, .btn-social:active, .btn-outline:active, .auth-btn a:active, .btn-white:active, .btn-transparent:active {
+            transform: translateY(8px) !important;
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3) !important;
+        }
+</style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -280,9 +450,13 @@
         </nav>
     
             <div class="auth-btn" style="margin-left: auto;">
-                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);">Login</a>
+                <a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 164, 173, 0.3);"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             </div>
-        </header>
+        
+        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('show'); document.body.style.overflow = document.querySelector('nav ul').classList.contains('show') ? 'hidden' : '';">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
 
     <!-- 1. ABOUT HERO -->
     <section id="about-hero">
@@ -296,7 +470,7 @@
     <section id="story">
         <div class="story-container">
             <div class="story-img reveal">
-                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Our Story">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Our Story">
             </div>
             <div class="story-content reveal delay-2">
                 <div class="section-header" style="text-align: left; margin-bottom: 30px;">
@@ -318,7 +492,7 @@
         <div class="mv-grid">
             <div class="mv-card reveal delay-1">
                 <div class="mv-img">
-                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mission">
+                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Mission">
                 </div>
                 <div class="mv-content">
                     <h3>Our Mission</h3>
@@ -383,19 +557,19 @@
         </div>
         <div class="exp-grid">
             <div class="exp-card reveal delay-1">
-                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="International Tours">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="International Tours">
                 <div class="exp-overlay"><h4>International Tours</h4></div>
             </div>
             <div class="exp-card reveal delay-2">
-                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Domestic Tours">
+                <img src="https://images.unsplash.com/photo-1465778893808-9b3d1b443be4?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Domestic Tours">
                 <div class="exp-overlay"><h4>Domestic Tours</h4></div>
             </div>
             <div class="exp-card reveal delay-3">
-                <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Honeymoon">
+                <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Honeymoon">
                 <div class="exp-overlay"><h4>Honeymoon</h4></div>
             </div>
             <div class="exp-card reveal delay-1">
-                <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Adventure">
+                <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Adventure">
                 <div class="exp-overlay"><h4>Adventure</h4></div>
             </div>
             <div class="exp-card reveal delay-2">
@@ -403,7 +577,7 @@
                 <div class="exp-overlay"><h4>Family Holidays</h4></div>
             </div>
             <div class="exp-card reveal delay-3">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Luxury Travel">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Luxury Travel">
                 <div class="exp-overlay"><h4>Luxury Travel</h4></div>
             </div>
         </div>
@@ -419,7 +593,7 @@
             <div class="tl-item reveal">
                 <div class="tl-dot"></div>
                 <div class="tl-content">
-                    <span class="tl-year">2014</span>
+                    <span class="tl-year">2020</span>
                     <h4>The Beginning</h4>
                     <p>Founded by a group of passionate globetrotters with a mission to share the beauty of the world.</p>
                 </div>
@@ -427,7 +601,7 @@
             <div class="tl-item reveal">
                 <div class="tl-dot"></div>
                 <div class="tl-content">
-                    <span class="tl-year">2017</span>
+                    <span class="tl-year">2024</span>
                     <h4>Global Expansion</h4>
                     <p>Expanded our network to partner with local experts in over 50 countries, enhancing our authentic tour offerings.</p>
                 </div>
@@ -435,7 +609,7 @@
             <div class="tl-item reveal">
                 <div class="tl-dot"></div>
                 <div class="tl-content">
-                    <span class="tl-year">2020</span>
+                    <span class="tl-year">2025</span>
                     <h4>Sustainable Travel Initiative</h4>
                     <p>Launched our eco-friendly travel packages, pledging to protect the destinations we love.</p>
                 </div>
@@ -443,7 +617,7 @@
             <div class="tl-item reveal">
                 <div class="tl-dot"></div>
                 <div class="tl-content">
-                    <span class="tl-year">2024</span>
+                    <span class="tl-year">2026</span>
                     <h4>Award-Winning Agency</h4>
                     <p>Recognized globally for excellence in customer service and innovative travel itinerary design.</p>
                 </div>
@@ -459,7 +633,7 @@
         </div>
         <div class="team-grid">
             <div class="team-card reveal delay-1">
-                <div class="team-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Team"></div>
+                <div class="team-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Team"></div>
                 <h4>Elena Rodriguez</h4>
                 <span>Founder & Luxury Specialist</span>
                 <p>With 15 years in luxury travel, Elena crafts bespoke five-star experiences globally.</p>
@@ -470,7 +644,7 @@
                 </div>
             </div>
             <div class="team-card reveal delay-2">
-                <div class="team-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Team"></div>
+                <div class="team-img"><img src="assets/person2.webp" alt="Marcus Johnson"></div>
                 <h4>Marcus Johnson</h4>
                 <span>Adventure Expedition Lead</span>
                 <p>An avid mountaineer, Marcus designs thrilling adventure packages for adrenaline seekers.</p>
@@ -481,7 +655,7 @@
                 </div>
             </div>
             <div class="team-card reveal delay-3">
-                <div class="team-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Team"></div>
+                <div class="team-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Team"></div>
                 <h4>Sophia Lee</h4>
                 <span>Cultural Tours Expert</span>
                 <p>Sophia uses her background in anthropology to build immersive, culture-rich itineraries.</p>
@@ -524,7 +698,7 @@
     <section id="diff">
         <div class="diff-container">
             <div class="diff-img reveal delay-2">
-                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Difference">
+                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="Difference">
             </div>
             <div class="diff-content reveal">
                 <div class="section-header" style="text-align: left; margin-bottom: 30px;">
@@ -576,7 +750,7 @@
                 <i class="fa-solid fa-quote-right testi-quote"></i>
                 <p class="testi-text">"The level of detail in our Italian getaway was astounding. Every dinner reservation, tour, and transfer was perfectly orchestrated. Truly the trip of a lifetime."</p>
                 <div class="testi-user">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="User">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="User">
                     <div>
                         <h4>Emma Wilson</h4>
                         <p>Traveled to Italy</p>
@@ -587,7 +761,7 @@
                 <i class="fa-solid fa-quote-right testi-quote"></i>
                 <p class="testi-text">"As a family of five, planning a trip can be stressful. They made our safari to Kenya effortless and magical for both the adults and the kids."</p>
                 <div class="testi-user">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="User">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="User">
                     <div>
                         <h4>James Carter</h4>
                         <p>Traveled to Kenya</p>
@@ -598,7 +772,7 @@
                 <i class="fa-solid fa-quote-right testi-quote"></i>
                 <p class="testi-text">"The local guides they connected us with in Thailand completely changed our perspective. We experienced the culture in a way we never could have on our own."</p>
                 <div class="testi-user">
-                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="User">
+                    <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60" alt="User">
                     <div>
                         <h4>Olivia Thompson</h4>
                         <p>Traveled to Thailand</p>
@@ -656,11 +830,11 @@
             <div>
                 <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 25px; margin-top:0;">Quick Links</h4>
                 <ul style="list-style: none; padding: 0; margin:0;">
-                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About Us</a></li>
-                    <li style="margin-bottom: 15px;"><a href="services.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Our Services</a></li>
-                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Travel Blog</a></li>
-                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact Us</a></li>
-                    <li style="margin-bottom: 15px;"><a href="login.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Login / Register</a></li>
+                    <li style="margin-bottom: 15px;"><a href="home.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Home</a></li>
+                    <li style="margin-bottom: 15px;"><a href="about.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">About</a></li>
+                    <li style="margin-bottom: 15px;"><a href="blog.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Blog</a></li>
+                    <li style="margin-bottom: 15px;"><a href="service.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Service</a></li>
+                    <li style="margin-bottom: 15px;"><a href="contact.html" style="color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='5px'" onmouseout="this.style.color='#aaa'; this.style.paddingLeft='0'">Contact</a></li>
                 </ul>
             </div>
             <div>
@@ -681,13 +855,13 @@
                     <button type="submit" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
                 <div style="margin-top: 25px;">
-                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> +1 (800) 123-4567</p>
+                    <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;"><i class="fa-solid fa-phone" style="color: var(--primary); margin-right: 10px;"></i> (980) 123-4567</p>
                     <p style="font-size: 14px; color: #aaa; margin-bottom: 0;"><i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> hello@stackly.com</p>
                 </div>
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2024 Stackly Agency. All Rights Reserved.</p>
+            <p style="font-size: 13px; color: #888; margin:0;">&copy; 2026 Stackly Agency. All Rights Reserved.</p>
             <div style="display: flex; gap: 20px;">
                 <a href="404.html" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
                 <a href="404.html" style="color: #888; text-decoration: none; font-size: 13px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
@@ -729,6 +903,15 @@
             observer.observe(el);
         });
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
 </body>
 </html>
+
+
 

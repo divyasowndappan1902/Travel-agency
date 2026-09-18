@@ -318,22 +318,16 @@ section {
 /* 2. Featured Packages */
 #packages { background: var(--bg-light); }
 .package-slider {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    overflow-x: auto;
     padding-bottom: 20px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
 }
-.package-slider::-webkit-scrollbar { display: none; }
 .pkg-card {
-    flex: 0 0 350px;
-    max-width: 85vw;
     background: var(--bg-white);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    scroll-snap-align: start;
     transition: var(--transition);
 }
 .pkg-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
@@ -596,12 +590,10 @@ section {
 #testimonials::before { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.7); }
 #testimonials .section-header, #testimonials .section-header h2, #testimonials .section-header p { position: relative; color: white; z-index: 2; }
 .testimonial-slider {
-    display: flex; gap: 30px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px 0;
-    position: relative; z-index: 2; scrollbar-width: none;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 20px 0;
+    position: relative; z-index: 2;
 }
-.testimonial-slider::-webkit-scrollbar { display: none; }
 .testi-card {
-    flex: 0 0 400px; scroll-snap-align: center;
     background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2); border-radius: 15px;
     padding: 40px; color: white;
@@ -949,7 +941,7 @@ section {
             .pricing-grid { grid-template-columns: 1fr !important; }
             
             /* Package Slider */
-            .package-slider { flex-direction: column !important; align-items: center !important; overflow-x: visible !important; }
+            .package-slider { display: flex !important; flex-direction: column !important; align-items: center !important; overflow-x: visible !important; }
             .pkg-card { flex: 0 0 auto !important; width: 100% !important; max-width: 400px !important; }
         }
 

@@ -177,9 +177,8 @@
 
         /* 9. TRAVELER TESTIMONIALS */
         #testimonials { background: var(--bg-light); text-align: center; }
-        .testi-slider { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; max-width: 1000px; margin: 0 auto; }
-        .testi-slider::-webkit-scrollbar { display: none; }
-        .testi-card { flex: 0 0 100%; scroll-snap-align: center; background: white; padding: 50px; border-radius: 20px; box-shadow: var(--shadow-sm); position: relative; }
+        .testi-slider { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding-bottom: 20px; max-width: 1000px; margin: 0 auto; }
+        .testi-card { background: white; padding: 50px; border-radius: 20px; box-shadow: var(--shadow-sm); position: relative; }
         .testi-card i.fa-quote-left { font-size: 40px; color: rgba(37,164,173,0.1); position: absolute; top: 30px; left: 40px; }
         .testi-text { font-size: 18px; font-style: italic; color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-family: 'Playfair Display', serif; }
         .testi-user { display: flex; flex-direction: column; align-items: center; gap: 10px; }

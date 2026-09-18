@@ -110,9 +110,8 @@
         #inspiration { background: var(--text-main); color: white; overflow: hidden; padding-right: 0 !important; }
         #inspiration .section-header { padding-right: 8%; }
         #inspiration .section-header h2 { color: white; }
-        .insp-slider { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; padding-right: 8%; scroll-snap-type: x mandatory; scrollbar-width: none; }
-        .insp-slider::-webkit-scrollbar { display: none; }
-        .insp-card { flex: 0 0 400px; max-width: 85vw; height: 500px; position: relative; border-radius: 20px; overflow: hidden; scroll-snap-align: center; cursor: pointer; }
+        .insp-slider { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding-bottom: 30px; }
+        .insp-card { height: 500px; position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; }
         .insp-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
         .insp-card:hover img { transform: scale(1.08); }
         .insp-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; }
@@ -173,9 +172,8 @@
 
         /* 7. POPULAR CATEGORIES */
         #categories { background: var(--bg-white); }
-        .cat-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none; }
-        .cat-scroll::-webkit-scrollbar { display: none; }
-        .cat-item { flex: 0 0 200px; height: 100px; position: relative; border-radius: 10px; overflow: hidden; cursor: pointer; }
+        .cat-scroll { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding-bottom: 20px; }
+        .cat-item { flex: 1 1 200px; max-width: 300px; height: 100px; position: relative; border-radius: 10px; overflow: hidden; cursor: pointer; }
         .cat-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; filter: brightness(0.6); }
         .cat-item:hover img { transform: scale(1.1); filter: brightness(0.4); }
         .cat-name { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; font-family: 'Poppins', sans-serif; z-index: 2; pointer-events: none; }

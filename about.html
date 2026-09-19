@@ -75,7 +75,7 @@
             justify-content: center;
             text-align: center;
             padding: 0 20px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&fm=webp&fit=crop&w=600&q=60') center/cover fixed;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
             color: white;
             margin-top: 0;
         }
@@ -429,6 +429,11 @@
             transform: translateY(8px) !important;
             box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3) !important;
         }
+        @media (max-width: 768px) {
+            .auth-btn { display: none !important; }
+            .mobile-login-btn { display: block !important; margin-top: 20px; }
+            .mobile-login-btn a { display: inline-block !important; }
+        }
 </style>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -445,8 +450,8 @@
                 <li><a href="about.html" style="color: var(--primary);">About</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="services.html">Service</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+                
+                    <li class="mobile-login-btn" style="display: none;"><a href="login.html" style="background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px; font-weight: 600;"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
         </nav>
     
             <div class="auth-btn" style="margin-left: auto;">
@@ -912,6 +917,7 @@
     </script>
 </body>
 </html>
+
 
 
 

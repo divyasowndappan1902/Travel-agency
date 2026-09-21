@@ -271,10 +271,59 @@
             transform: translateY(8px) !important;
             box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3) !important;
         }
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111111;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .preloader-text {
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin: 0;
+            animation: pulseText 1.5s infinite ease-in-out alternate;
+        }
+        @keyframes pulseText {
+            0% { opacity: 0.5; transform: scale(0.95); letter-spacing: 2px; }
+            100% { opacity: 1; transform: scale(1); letter-spacing: 6px; text-shadow: 0 0 20px var(--primary); }
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        body.loaded #preloader {
+            opacity: 0;
+            visibility: hidden;
+        }
 </style>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="dashboard-body-class">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <h2 class="preloader-text">STACKLY</h2>
+            <div class="spinner"></div>
+        </div>
+    </div>
 
     <!-- Sidebar Overlay -->
     <div class="sidebar-overlay"></div>
@@ -783,6 +832,19 @@
             once: true
         });
     </script>
+    <script>
+        // Preloader Logic
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            setTimeout(function() {
+                var preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.display = 'none';
+                }
+            }, 500); // Wait for transition to finish
+        });
+    </script>
 </body>
 </html>
+
 

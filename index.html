@@ -88,7 +88,7 @@
             text-align: center;
             color: #fff;
             padding: 0 20px;
-            margin-top: -50px;
+            margin-top: 0;
         }
 
         @keyframes heroTextReveal {
@@ -955,9 +955,51 @@ section {
             .auth-btn { display: none !important; }
             .mobile-login-btn { display: block !important; margin-top: 20px; }
             .mobile-login-btn a { display: inline-block !important; }
-            .hero-inner { flex-direction: column !important; justify-content: center !important; text-align: center !important; padding-top: 120px !important; }
-            .hero-content { align-items: center !important; text-align: center !important; padding-top: 0 !important; }
+            .hero-inner { flex-direction: column !important; justify-content: flex-start !important; text-align: center !important; padding-top: 120px !important; }
+            .hero-content { align-items: center !important; text-align: center !important; padding-top: 0 !important; margin-bottom: 40px; }
             .hero-content div { justify-content: center !important; }
+        }
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111111;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .preloader-text {
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin: 0;
+            animation: pulseText 1.5s infinite ease-in-out alternate;
+        }
+        @keyframes pulseText {
+            0% { opacity: 0.5; transform: scale(0.95); letter-spacing: 2px; }
+            100% { opacity: 1; transform: scale(1); letter-spacing: 6px; text-shadow: 0 0 20px var(--primary); }
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        body.loaded #preloader {
+            opacity: 0;
+            visibility: hidden;
         }
 </style>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -965,6 +1007,13 @@ section {
 
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <h2 class="preloader-text">STACKLY</h2>
+            <div class="spinner"></div>
+        </div>
+    </div>
 
     <header>
             <a href="404.html" class="logo">
@@ -1000,7 +1049,7 @@ section {
     <div class='hero-inner' style='display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 85px 5% 0; width: 100%; min-height: 100vh; box-sizing: border-box; position: relative; z-index: 2; flex: 1; text-align: left; background: rgba(0, 0, 0, 0.55);'>
         <div class='hero-content' style='flex: 1; max-width: 700px; z-index: 3; padding: 40px 0; align-items: flex-start; text-align: left;'>
             <h3 style='color: var(--primary); font-size: 16px; font-weight: 500; margin-bottom: 25px; letter-spacing: 5px; text-transform: uppercase;'>The Art of Travel</h3>
-            <h1 style='color: #ffffff; font-size: 78px; font-weight: 400; line-height: 1.15; margin-bottom: 35px; font-family: "Playfair Display", serif;'>Discover the World's<br><span style="font-style: italic; font-weight: 600; color: #f9f6f0;">Hidden Masterpieces</span></h1>
+            <h1 style='color: #ffffff; font-size: 78px; font-weight: 400; line-height: 1.15; margin-bottom: 35px; font-family: "Playfair Display", serif;'>World's<br><span style="font-style: italic; font-weight: 600; color: #f9f6f0;">Hidden<br>Masterpieces</span></h1>
             <p style='color: #e0e0e0; font-size: 18px; line-height: 1.9; margin-bottom: 50px; font-weight: 300; max-width: 600px; letter-spacing: 0.5px;'>Experience unparalleled luxury and curated itineraries tailored exclusively for the discerning traveler. Embark on a journey beyond the ordinary.</p>
             <div style='display: flex; gap: 25px; justify-content: flex-start; flex-wrap: wrap;'>
                 <button class='btn-cta' onclick="window.location.href='404.html'" style='background: var(--primary); color: #fff; padding: 18px 45px; border-radius: 4px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.2);'>Plan Your Journey</button>
@@ -1961,6 +2010,17 @@ section {
                 this.style.background = 'rgba(255,255,255,0.05)';
             });
         }
+        
+        // Preloader Logic
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            setTimeout(function() {
+                var preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.display = 'none';
+                }
+            }, 500); // Wait for transition to finish
+        });
     </script>
 </body>
 </html>
